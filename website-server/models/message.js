@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("./user");
 
-
 var messageSchema = new mongoose.Schema({
   text: {
     type: String,

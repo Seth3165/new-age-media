@@ -1,10 +1,9 @@
 /*global localStorage*/
 import React from 'react';
-import {Provider} from "react-redux"
-import {configureStore} from "../store"
+import {Provider} from "react-redux";
+import {configureStore} from "../store";
 import {BrowserRouter as Router} from "react-router-dom";
-import UserNav from "./UserNav";
-import Main from "./Main";
+import MainNav from "./MainNav";
 import {setAuthorizationToken, setCurrentUser} from "../store/actions/auth";
 import jwtDecode from "jwt-decode";
 
@@ -23,8 +22,7 @@ const App = () => (
   <Provider store={store}>
     <Router>
       <div className="appViewport">
-        <UserNav/>
-        <Main/>
+        <MainNav/>
       </div>
     </Router>
   </Provider>

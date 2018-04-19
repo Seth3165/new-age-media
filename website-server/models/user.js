@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
   messages: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Message"
+  }],
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post"
   }]
 });
 
