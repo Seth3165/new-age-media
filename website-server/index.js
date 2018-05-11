@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
 const messagesRoutes = require("./routes/messages");
@@ -12,6 +13,7 @@ const PORT = 8081;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(methodOverride('_method'));
 
 app.use("/api/auth", authRoutes);
 app.use(
