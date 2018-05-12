@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("./user");
+const Post = require("./post");
 
 var messageSchema = new mongoose.Schema({
   text: {
@@ -11,6 +12,11 @@ var messageSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
+  },
+  post: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post",
+    required: true
   }
 }, {
   timestamps: true
@@ -21,6 +27,9 @@ messageSchema.pre("remove", async function(next){
     let user = await User.findById(this.user);
     user.messages.remove(this.id);
     await user.save();
+    let post = await Post.findById(this.post);
+    post.messages.remove(this.id);
+    await post.save();
     return next();
   } catch(err) {
     return next(err);

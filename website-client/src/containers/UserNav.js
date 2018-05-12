@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {logout} from "../store/actions/auth";
 import UserAside from "../components/UserAside";
+import UserPosts from "./UserPosts";
 
 class UserNav extends Component {
   constructor(props){

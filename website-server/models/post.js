@@ -16,13 +16,16 @@ var postSchema = new mongoose.Schema({
     ref: "User",
     required: true
   },
-  comments: [{
+  messages: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Comment"
+    ref: "Message"
   }],
   iframeUrl: {
     type: String
-  }
+  },
+  files: [{
+    type: String
+  }]
 }, {
   timestamps:true
 });
@@ -38,5 +41,5 @@ postSchema.pre("remove", async function(next){
   }
 });
 
-const Message = mongoose.model('Post', postSchema);
-module.exports = Message;
+const Post = mongoose.model('Post', postSchema);
+module.exports = Post;
