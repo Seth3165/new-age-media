@@ -1,9 +1,11 @@
 const db = require('../models');
 const fs = require("fs");
 const S3FS = require("s3fs");
+const aKI = process.env.ACCESS_KEY_ID;
+const sAK = process.env.SECRET_ACCESS_KEY;
 const s3fsImpl = new S3FS("newagemedia", {
-  accessKeyId: 'AKIAJFILQKSZWOWBIY5A',
-  secretAccessKey: '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'
+  accessKeyId: aKI,
+  secretAccessKey: sAK
 });
 
 exports.sendUpload = async function (req, res, next) {
