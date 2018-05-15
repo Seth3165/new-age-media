@@ -10,7 +10,7 @@ import withAuth from "../hocs/withAuth";
 const MainNav = props => {
   const {authUser, errors, removeError, currentUser} = props;
   return(
-    <div className="container">
+    <div className="navContainer">
       <Switch>
         <Route exact path="/" render={props => <UserNav currentUser={currentUser} {...props}/>}/>
         <Route 

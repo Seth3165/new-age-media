@@ -19,7 +19,7 @@ class UserNav extends Component {
     const{currentUser} = this.props;
     if(!currentUser.isAuthenticated){
       return (
-        <div className="navContainer">
+        <div>
           <header>Welcome To New Age Media!</header>
           <dialog></dialog>
           <nav>
@@ -30,12 +30,12 @@ class UserNav extends Component {
       );
     }
     return (
-      <div className="navContainer">
+      <div>
         <UserAside
           profileImageUrl={currentUser.user.profileImageUrl}
           username={currentUser.user.username}
         />
-        <UserPosts/>
+         <Link to={`/users/${this.props.currentUser.user.id}/posts/new`}>New Post</Link>
         <a class="loButton" onClick={this.logout}>Log out</a>
       </div>
     );

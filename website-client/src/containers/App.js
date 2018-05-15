@@ -4,6 +4,8 @@ import {Provider} from "react-redux";
 import {configureStore} from "../store";
 import {BrowserRouter as Router} from "react-router-dom";
 import MainNav from "./MainNav";
+import MainDisplay from "./MainDisplay";
+import ScrollNav from "./ScrollNav";
 import {setAuthorizationToken, setCurrentUser} from "../store/actions/auth";
 import jwtDecode from "jwt-decode";
 
@@ -21,8 +23,13 @@ if(localStorage.jwtToken){
 const App = () => (
   <Provider store={store}>
     <Router>
-      <div className="appViewport">
-        <MainNav/>
+      <div>
+        <header><h1>New Age Media</h1></header>
+        <div className="appViewport">
+          <MainNav/>
+          <MainDisplay/>
+          <ScrollNav/>
+        </div>
       </div>
     </Router>
   </Provider>

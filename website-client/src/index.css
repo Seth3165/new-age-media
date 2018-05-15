@@ -1,5 +1,26 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.appViewport {
+  display: flex;
+  justify-content: space-around;
+}
+
+header{
+  text-align: center;
+}
+
+.navContainer{
+  width: 200px;
+  height: 600px;
+  border: solid black 2px;
+}
+
+.displayContainer{
+  width: 600px;
+  height: 600px;
+  border: solid black 2px;
+}
+
+.scrollContainer{
+  width: 200px;
+  height: 600px;
+  border: solid black 2px;
 }
