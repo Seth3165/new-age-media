@@ -3,9 +3,12 @@ const db = require('../models');
 exports.createPost = async function (req, res, next) {
   try {
     let post = await db.Post.create({
-      text: req.body.text,
+      title: req.body.title,
+      description: req.body.description,
+      file: req.body.file,
       user: req.params.id
     });
+    await post.submitFile(req.body.file);
     let foundUser = await db.User.findById(req.params.id);
     foundUser.posts.push(post.id);
     await foundUser.save();

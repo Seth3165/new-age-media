@@ -17,9 +17,10 @@ exports.sendUpload = async function (req, res, next) {
       fs.unlink(file.path, function(err){
         if(err){console.error(err)}
       });
-      res.redirect();
     });
-  } catch(err) {}
+  } catch(err) {
+    return next(err);
+  }
 };
 
 module.exports = exports;

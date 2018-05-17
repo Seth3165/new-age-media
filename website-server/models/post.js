@@ -20,12 +20,9 @@ var postSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Message"
   }],
-  iframeUrl: {
+  file: {
     type: String
-  },
-  files: [{
-    type: String
-  }]
+  }
 }, {
   timestamps:true
 });
@@ -40,6 +37,14 @@ postSchema.pre("remove", async function(next){
     return next(err);
   }
 });
+
+postSchema.methods.submitFile = async function (file, next) {
+  try{
+    
+  } catch (err) {
+    return next(err);
+  }
+};
 
 const Post = mongoose.model('Post', postSchema);
 module.exports = Post;

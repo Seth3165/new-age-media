@@ -32,10 +32,10 @@ export const fetchPosts = () => {
   };
 };
 
-export const createNewPost = text => (dispatch, getState) => {
+export const createNewPost = (title, description, files) => (dispatch, getState) => {
   let {currentUser} = getState();
   const id = currentUser.user.id;
-  return apiCall("post", `/api/users/${id}/posts`, {text})
+  return apiCall("post", `/api/users/${id}/posts`, {title, description, files})
     .then(res => {})
     .catch(err => dispatch(addError(err.message)));
 };
