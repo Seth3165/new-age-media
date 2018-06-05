@@ -45,7 +45,7 @@ export default class AuthForm extends Component {
     
     return(
         <div>
-          <form onSubmit={this.handleSubmit}>
+          <form className="authForm" onSubmit={this.handleSubmit}>
             <h2>{heading}</h2>
             {errors.message && (
               <div>{errors.message}</div>
@@ -85,7 +85,7 @@ export default class AuthForm extends Component {
                 />
               </div>
             )}
-            <button type="submit">
+            <button className="authBtn" type="submit">
               {buttonText}
             </button>
           </form>

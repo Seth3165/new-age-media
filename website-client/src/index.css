@@ -1,26 +1,136 @@
+body {
+  background: #B3FFAB;
+	background: -webkit-linear-gradient(to bottom right, #12FFF7, #3f4c6b, #FFAFBD, #c21500, #B3FFAB);
+	background: linear-gradient(to bottom right, #12FFF7, #3f4c6b, #FFAFBD, #c21500, #B3FFAB);
+}
+
 .appViewport {
   display: flex;
   justify-content: space-around;
+  opacity: 0;
+  animation: 1s appload 0s forwards;
+}
+
+.navContainer, .displayContainer, .scrollContainer {
+  border-radius: 10px;
+  border: solid lightblue 2em;
+  background: #364EEB;
 }
 
 header{
   text-align: center;
 }
 
-.navContainer{
-  width: 200px;
-  height: 600px;
-  border: solid black 2px;
+.navContainer header {
+  font-size: 24px;
+  margin-top: 10vh;
+  opacity: 0;
+  animation: 1s navheaderload 1s forwards;
 }
 
-.displayContainer{
+.navContainer {
+  width: 200px;
+  height: 600px;
+  border-color: #2C42D1;
+  border-width: 15px;
+}
+
+.strtNav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 600px;
+}
+
+.suBtn, .siBtn {
+  text-decoration: none;
+  color: white;
+  background: green;
+  border: 2px solid black;
+  padding: 5px;
+  margin-bottom: 3vh;
+  transition: .2s all linear;
+}
+
+.suBtn:hover, .siBtn:hover {
+  background-color: white;
+  color: blue;
+}
+
+.authForm {
+  margin-left: .3vw;
+  margin-top: 30vh;
+  margin-right: .1vw;
+  opacity: 0;
+  animation: 1s slidefadeauth 1s forwards;
+}
+
+.authForm h2 {
+  
+}
+
+.authForm label {
+
+}
+
+.authForm input {
+  display: block;
+  width: 95%;
+  background-color: green;
+  border-radius: 7px;
+  margin: 5% auto;
+}
+
+.authbtnDiv {
+  display: flex;
+  justify-content: space-around;
+}
+
+.authBtn {
+  border-radius: 10px;
+  width: 80px;
+  height: 50px;
+  font-size: 20px;
+  background-color: lightblue;
+}
+
+aside img {
+  width: 50px;
+  height: 50px;
+}
+
+.displayContainer {
   width: 600px;
   height: 600px;
-  border: solid black 2px;
+  border-color: #2C42D1;
+  border-width: 15px;
 }
 
-.scrollContainer{
+.scrollContainer {
   width: 200px;
   height: 600px;
-  border: solid black 2px;
+  border-color: #2C42D1;
+  border-width: 15px;
+}
+
+@keyframes appload {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes navheaderload {
+  100% {
+    opacity: 1;
+    margin-top: 3vh;
+  }
+}
+
+@keyframes slidefadeauth {
+	100% {
+		opacity: 1;
+		margin-left: .3vw;
+    margin-top: 0vh;
+    margin-right: .1vw;
+	}
 }

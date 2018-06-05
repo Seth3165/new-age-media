@@ -18,7 +18,7 @@ class PostForm extends Component {
       .createNewPost(
         this.state.title, 
         this.state.description,
-        this.state.files);
+        this.state.file);
     this.setState({title: ""});
     this.setState({description: ""});
     this.setState({file: ""});

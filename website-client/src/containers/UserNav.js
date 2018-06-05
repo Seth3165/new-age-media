@@ -19,12 +19,12 @@ class UserNav extends Component {
     const{currentUser} = this.props;
     if(!currentUser.isAuthenticated){
       return (
-        <div>
+        <div className="strtNav">
           <header>Welcome To New Age Media!</header>
           <dialog></dialog>
-          <nav>
-            <Link to="/signup">Sign up</Link>
-            <Link to="/signin">Log in</Link>
+          <nav className="authbtnDiv">
+            <Link className="suBtn" to="/signup">Sign up</Link>
+            <Link className="siBtn" to="/signin">Log in</Link>
           </nav>
         </div>
       );
