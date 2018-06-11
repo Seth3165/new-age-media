@@ -3,6 +3,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const multer  = require('multer');
+const upload = multer();
+const autoReap  = require('multer-autoreap');
 const methodOverride = require("method-override");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
@@ -10,12 +13,16 @@ const postsRoutes = require("./routes/posts");
 const messagesRoutes = require("./routes/messages");
 const uploadsRoutes = require("./routes/uploads");
 const {loginRequired, ensureCorrectUser} = require("./middleware/auth");
-const db = require('./models');
+const db = require("./models");
 const PORT = 8081;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
+app.use(autoReap);
+autoReap.options = {
+	reapOnError: true
+};
 
 app.use("/api/auth", authRoutes);
 app.use(
@@ -32,8 +39,9 @@ app.use(
 );
 app.use(
   "/api/users/:id/uploads",
-  loginRequired, 
-  ensureCorrectUser, 
+  loginRequired,
+  ensureCorrectUser,
+  upload.single('upload'),
   uploadsRoutes
 );
 

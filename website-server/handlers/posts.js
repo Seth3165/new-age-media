@@ -5,10 +5,9 @@ exports.createPost = async function (req, res, next) {
     let post = await db.Post.create({
       title: req.body.title,
       description: req.body.description,
-      file: req.body.file,
+      file: req.body.file.filename,
       user: req.params.id
     });
-    await post.submitFile(req.body.file);
     let foundUser = await db.User.findById(req.params.id);
     foundUser.posts.push(post.id);
     await foundUser.save();

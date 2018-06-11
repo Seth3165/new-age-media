@@ -1,33 +1,34 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {createNewPost} from "../store/actions/posts";
+import {sendUpload} from "../store/actions/uploads";
 
 class PostForm extends Component {
   constructor(props){
     super(props);
+    this.fileInput = React.createRef();
     this.state = {
       title: "",
-      description: "",
-      file: ""
+      description: ""
     };
   }
   
   handleNewPost = event => {
     event.preventDefault();
-    this.props
-      .createNewPost(
-        this.state.title, 
-        this.state.description,
-        this.state.file);
+    // this.props
+    //   .createNewPost(
+    //     this.state.title, 
+    //     this.state.description,
+    //     this.state.file.filename);
+    this.props.sendUpload(this.fileInput.files[0]);
     this.setState({title: ""});
     this.setState({description: ""});
-    this.setState({file: ""});
     this.props.history.push("/");
   }
   
   render(){
     return(
-      <form onSubmit={this.handleNewPost}>
+      <form encType="multipart/form-data" onSubmit={this.handleNewPost}>
         {this.props.errors.message && (
           <div className="errorMessage">{this.props.errors.message}</div>
         )}
@@ -48,8 +49,10 @@ class PostForm extends Component {
           name="file"
           id="file"
           className="form-control" 
-          value={this.state.file}
-          onChange={e => this.setState({file: e.target.value})}
+          ref={input => {
+              this.fileInput = input;
+            }}
+          onChange={e => this.setState({file: e.target.files})}
         />
         <button type="submit" className="btn btn-success pull-right">
         Create a post!
@@ -65,4 +68,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {createNewPost})(PostForm);
+export default connect(mapStateToProps, {createNewPost, sendUpload})(PostForm);

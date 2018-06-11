@@ -36,7 +36,7 @@ class UserNav extends Component {
           username={currentUser.user.username}
         />
          <Link to={`/users/${this.props.currentUser.user.id}/posts/new`}>New Post</Link>
-        <a class="loButton" onClick={this.logout}>Log out</a>
+        <a className="loButton" onClick={this.logout}>Log out</a>
       </div>
     );
   }

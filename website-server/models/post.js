@@ -38,13 +38,5 @@ postSchema.pre("remove", async function(next){
   }
 });
 
-postSchema.methods.submitFile = async function (file, next) {
-  try{
-    
-  } catch (err) {
-    return next(err);
-  }
-};
-
 const Post = mongoose.model('Post', postSchema);
 module.exports = Post;

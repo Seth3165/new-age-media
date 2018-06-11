@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router({mergeParams: true});
-const multiparty = require("connect-multiparty");
-const multipartyMiddleware = multiparty();
+// const multipart = require("connect-multiparty");
+// const multipartMiddleware = multipart();
 
-router.use(multipartyMiddleware);
+// router.use(multipartMiddleware);
+// const multer  = require('multer')
+// const upload = multer();
 
 const {
   sendUpload
