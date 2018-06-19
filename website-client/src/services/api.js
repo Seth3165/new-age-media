@@ -13,7 +13,7 @@ export function apiCall(method, path, data) {
     return axios[method.toLowerCase()](path, data).then(res => {
       return resolve(res.data);
     }).catch(err => {
-      return reject(err.response.data.error);
+      return reject(err);
     });
   });
 }

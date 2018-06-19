@@ -1,32 +1,49 @@
-const db = require("../models");
-const AWS = require("aws-sdk");
-const zlib = require("zlib");
-const fs = require("fs");
-const s3Stream = require("s3-upload-stream")(new AWS.S3());
-const aKI = process.env.ACCESS_KEY_ID;
-const sAK = process.env.SECRET_ACCESS_KEY;
-
-AWS.config.update({accessKeyId: aKI, secretAccessKey: sAK});
+// const db = require("../models");
+// const fs = require("fs");
+// const stream = require("stream");
 
 exports.sendUpload = async function (req, res, next) {
   try{
-    let file = req.file;
-    let read = fs.createReadStream(file.path);
-    let compress = zlib.createGzip();
-    let uStream = s3Stream.upload({
-      Bucket: 'namtestbucket',
-      Key: file.originalname
-    });
+    // let file = req.file;
     
-    uStream.on('uploaded', function (details) {
-      console.log(details);
-    });
+    // stream.pipe(uploadFromStream(s3));
+
+    // function uploadFromStream(s3) {
+    //   let pass = new stream.PassThrough();
     
-   read.pipe(compress).pipe(uStream);
+    //   let params = {Bucket: BUCKET, Key: KEY, Body: pass};
+    //   s3.upload(params, function(err, data) {
+    //     console.log(err, data);
+    //   });
+    
+    //   return pass;
+    res.redirect('/');
   } catch (err) {
     return next(err);
   }
-};
+}
+
+
+
+// exports.sendUpload = async function (req, res, next) {
+//   try{
+//     let file = req.file;
+//     let read = fs.createReadStream(file.path);
+//     let compress = zlib.createGzip();
+//     let uStream = s3Stream.upload({
+//       Bucket: 'namtestbucket',
+//       Key: file.originalname
+//     });
+    
+//     uStream.on('uploaded', function (details) {
+//       console.log(details);
+//     });
+    
+//   read.pipe(compress).pipe(uStream);
+//   } catch (err) {
+//     return next(err);
+//   }
+// };
 
 // exports.sendUpload = async function (req, res, next) {
 //   try{

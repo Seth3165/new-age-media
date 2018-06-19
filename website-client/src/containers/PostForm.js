@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {createNewPost} from "../store/actions/posts";
-import {sendUpload} from "../store/actions/uploads";
+import {getSigPut} from "../store/actions/uploads";
 
 class PostForm extends Component {
   constructor(props){
@@ -11,16 +11,20 @@ class PostForm extends Component {
       title: "",
       description: ""
     };
+    
+    this.handleNewPost = this.handleNewPost.bind(this);
   }
   
   handleNewPost = event => {
     event.preventDefault();
+    let data = new FormData();
+    data.append('file', this.fileInput.files[0]);
     // this.props
     //   .createNewPost(
     //     this.state.title, 
     //     this.state.description,
     //     this.state.file.filename);
-    this.props.sendUpload(this.fileInput.files[0]);
+    this.props.getSigPut(data);
     this.setState({title: ""});
     this.setState({description: ""});
     this.props.history.push("/");
@@ -50,9 +54,8 @@ class PostForm extends Component {
           id="file"
           className="form-control" 
           ref={input => {
-              this.fileInput = input;
-            }}
-          onChange={e => this.setState({file: e.target.files})}
+            this.fileInput = input;
+          }}
         />
         <button type="submit" className="btn btn-success pull-right">
         Create a post!
@@ -68,4 +71,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {createNewPost, sendUpload})(PostForm);
+export default connect(mapStateToProps, {createNewPost, getSigPut})(PostForm);
