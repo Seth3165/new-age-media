@@ -13,6 +13,7 @@ const MainDisplay = props => {
       <Switch>
         <Route 
           path="/users/:id/posts/new"
+          currentUser={currentUser}
           component={withAuth(PostForm)}/>
       </Switch>
     </div>

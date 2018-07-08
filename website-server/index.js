@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const helmet = require('helmet');
 const methodOverride = require("method-override");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
@@ -13,8 +14,10 @@ const {loginRequired, ensureCorrectUser} = require("./middleware/auth");
 const db = require("./models");
 const PORT = 8081;
 
-app.use(cors());
-app.use(bodyParser.json());
+app.use(helmet());
+app.use(cors({origin: true, credentials: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({extended: true}));
 app.use(methodOverride('_method'));
 
 app.use("/api/auth", authRoutes);
@@ -30,12 +33,24 @@ app.use(
   ensureCorrectUser, 
   messagesRoutes
 );
-app.use(
-  "/api/users/:id/uploads",
-  loginRequired,
-  ensureCorrectUser,
-  uploadsRoutes
-);
+  
+// app.get('/aws/sign', uploadsRoutes.signedRequest);
+// app.get('/aws/files', uploadsRoutes.listFiles);
+// app.get('/aws/files/:fileName'. uploadsRoutes.getFileSignedRequest);
+// app.delete('/aws/files/:fileName', uploadsRoutes.deleteFile);
+
+// (req, res) => {
+//     bucket: "namtestbucket",
+//     region: 'us-east-1',
+//     credentials: {
+//       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//       secretAccessKey: process.env.SECRET_ACCESS_KEY_ID,
+//     },
+//     signatureVersion: 'v4',
+//     headers: {'Access-Control-Allow-Origin': '*'}, // optional
+//     ACL: 'private', // this is default
+//     uniquePrefix: true // (4.0.2 and above) default is true, setting the attribute to false preserves the original filename in S3
+// }));
 
 app.get("/api/messages", loginRequired, async function(req, res, next) {
   try {
