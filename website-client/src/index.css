@@ -100,10 +100,37 @@ aside img {
 }
 
 .displayContainer {
-  width: 600px;
+  width: 50vw;
   height: 600px;
   border-color: #2C42D1;
   border-width: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.postList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.postItem {
+  text-decoration: none;
+  color: black;
+  background-color: green;
+  border: solid black 0.2em;
+  padding: 1em;
+  width: 40vw;
+  height: 6em;
+  border-radius: 10px;
+  transition: all 0.2s linear;
+}
+
+.postItem:hover {
+  border: solid grey 0.2em;
+  padding: 1.3em;
 }
 
 .scrollContainer {

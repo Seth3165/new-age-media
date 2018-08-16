@@ -2,27 +2,23 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 // import Uploader from "../components/Uploader";
 import {createNewPost} from "../store/actions/posts";
-import {getSigPut} from "../store/actions/uploads";
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import ReactS3 from 'react-s3';
 import { uploadFile } from 'react-s3';
 import {AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} from "../keys";
+// import Mp4Convert from 'mp4-convert';
+// import ffmpeg from 'ffmpeg';
 
-const config = {
-  bucketName: 'namtestbucket',
-  albumName: 'videos',
-  region: 'us-east-1',
-  accessKeyId: AWS_ACCESS_KEY_ID,
-  secretAccessKey: AWS_SECRET_ACCESS_KEY
-};
 
 class PostForm extends Component {
   constructor(props){
     super(props);
     this.state = {
       title: "",
-      description: ""
+      description: "",
+      files: []
+      // acceptedFiles: []
     };
     
     // this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -75,27 +71,64 @@ class PostForm extends Component {
   
   
   
-  // handleNewPost = event => {
-    // event.preventDefault();
-    // this.props
-    //   .createNewPost(
-    //     this.state.title, 
-    //     this.state.description,
-    //     this.state.file.filename);
-    // this.setState({title: ""});
-    // this.setState({description: ""});
-    // this.props.history.push("/");
-  // }
-  
-  _onDrop = (files) => {
-    ReactS3.uploadFile(files[0] , config)
+  handleNewPost = event => {
+    event.preventDefault();
+    // let files = this.state.acceptedFiles.slice();
+    // console.log(files)
+    // console.log(files[0].name);
+    // files[0].name = files[0].name.split(' ').join('');
+    // console.log(files[0].name);
+    // this.setState({files});
+    // console.log(this.state.files[0].name);
+    let config = {
+      bucketName: 'namtestbucket',
+      // albumName: 'videos',
+      region: 'us-east-1',
+      accessKeyId: AWS_ACCESS_KEY_ID,
+      secretAccessKey: AWS_SECRET_ACCESS_KEY
+    };
+    // // this.state.files[0].name.split(' ').join('');
+    
+    // let convert = new Mp4Convert(input, output);
+    // try {
+    // 	new ffmpeg(this.state.files[0], function (err, video) {
+    // 		if (!err) {
+    // 			console.log('The video is ready to be processed');
+    // 			console.log(video);
+    // 		// 	video.setVideoFormat('mp4');
+    // 		} else {
+    // 			console.log('Error: ' + err);
+    // 		}
+    // 	});
+    // } catch (e) {
+    // 	console.log(e.code);
+    // 	console.log(e.msg);
+    // }
+    
+    this.props
+      .createNewPost(
+        this.state.title,
+        this.state.description,
+        this.state.files[0].name);
+    ReactS3.uploadFile(this.state.files[0] , config)
     .then( (data) => {
-      console.log(data.location)
+      console.log(data);
+      console.log(data.location);
     })
     .catch( (err) => {
       alert(err);
-    })
+    });
+    this.setState({title: ""});
+    this.setState({description: ""});
+    this.setState({files: []});
+    this.props.history.push("/");
   }
+  
+  _onDrop = (files) => {
+    this.setState({files});
+  }
+  
+  
   
   // _onDrop = (files) => {
     // upload.post(`/uploads`)
@@ -191,7 +224,7 @@ class PostForm extends Component {
           value={this.state.description}
           onChange={e => this.setState({description: e.target.value})}
         />
-        <Dropzone onDrop={ this._onDrop } size={ 150 }>
+        <Dropzone onDrop={ this._onDrop.bind(this) } size={ 150 }>
           <div>
             Drop some files here!
           </div>
@@ -210,4 +243,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {createNewPost, getSigPut})(PostForm);
+export default connect(mapStateToProps, {createNewPost})(PostForm);

@@ -10,6 +10,7 @@ const UserAside = ({profileImageUrl, username}) => (
           width="200"
           height="200"
         />
+        <div>{username}</div>
       </div>
   </aside>
 );

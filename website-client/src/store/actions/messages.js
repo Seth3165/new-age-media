@@ -30,7 +30,7 @@ export const fetchMessages = () => {
         dispatch(addError(err.message));
       });
   };
-};
+}; 
 
 export const postNewMessage = text => (dispatch, getState) => {
   let {currentUser} = getState();

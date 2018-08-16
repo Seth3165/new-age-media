@@ -8,23 +8,24 @@ const methodOverride = require("method-override");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
 const postsRoutes = require("./routes/posts");
+const postDisplayRoute = require("./routes/postdisplay");
 const messagesRoutes = require("./routes/messages");
 const uploadsRoutes = require("./routes/uploads");
+const videoRoutes = require("./routes/videos");
 const {loginRequired, ensureCorrectUser} = require("./middleware/auth");
 const db = require("./models");
 const PORT = 8081;
 
 app.use(helmet());
-app.use(cors({origin: true, credentials: true}));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({extended: true}));
+app.use(cors());
+app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 
 app.use("/api/auth", authRoutes);
 app.use(
   "/api/users/:id/posts",
   loginRequired, 
-  ensureCorrectUser, 
+  ensureCorrectUser,
   postsRoutes
 );
 app.use(
@@ -51,6 +52,10 @@ app.use(
 //     ACL: 'private', // this is default
 //     uniquePrefix: true // (4.0.2 and above) default is true, setting the attribute to false preserves the original filename in S3
 // }));
+
+app.use("/api/posts", loginRequired, postDisplayRoute);
+
+app.use("/video", videoRoutes);
 
 app.get("/api/messages", loginRequired, async function(req, res, next) {
   try {

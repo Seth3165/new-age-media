@@ -5,7 +5,7 @@ exports.createPost = async function (req, res, next) {
     let post = await db.Post.create({
       title: req.body.title,
       description: req.body.description,
-      file: req.body.file.filename,
+      file: req.body.filename,
       user: req.params.id
     });
     let foundUser = await db.User.findById(req.params.id);
@@ -23,9 +23,27 @@ exports.createPost = async function (req, res, next) {
 
 exports.getPost = async function (req, res, next) {
   try {
-    let post = await db.Post.find(req.params.post_id);
+    let post = await db.Post.findById(req.params.post_id)
+    .populate("user", {
+      username: true,
+      profileImageUrl: true
+    });
     return res.status(200).json(post);
   } catch(err) {
+    return next(err);
+  }
+};
+
+exports.showPosts = async function (req, res, next) {
+  try {
+    let posts = await db.Post.find()
+      .sort({ createdAt: "desc" })
+      .populate("user", {
+        username: true,
+        profileImageUrl: true
+      });
+    return res.status(200).json(posts);
+  } catch (err) {
     return next(err);
   }
 };

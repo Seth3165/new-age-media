@@ -5,8 +5,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.0.0",
+    "ffmpeg": "0.0.4",
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.1",
+    "mp4-convert": "^1.0.2",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-dropzone": "^4.2.11",

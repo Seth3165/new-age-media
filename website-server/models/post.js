@@ -16,12 +16,9 @@ var postSchema = new mongoose.Schema({
     ref: "User",
     required: true
   },
-  messages: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Message"
-  }],
   file: {
-    type: String
+    type: String,
+    required: true
   }
 }, {
   timestamps:true

@@ -12,7 +12,6 @@ const MainNav = props => {
   return(
     <div className="navContainer">
       <Switch>
-        <Route exact path="/" render={props => <UserNav currentUser={currentUser} {...props}/>}/>
         <Route 
           exact 
           path="/signin" 
@@ -46,6 +45,7 @@ const MainNav = props => {
             );
           }}
         />
+        <Route path="/" render={props => <UserNav currentUser={currentUser} {...props}/>}/>
       </Switch>
     </div>
   );
