@@ -1,6 +1,6 @@
 import {apiCall} from "../../services/api";
 import {addError} from "./errors";
-import {SHOW_POST, LOAD_POSTS, REMOVE_POST, REINSTANCE_POSTS} from "../actionTypes";
+import {SHOW_POST, LOAD_POSTS, LOAD_MY_POSTS, LOAD_MY_FAVORITES, ADD_FAVORITE, REMOVE_POST, REINSTANCE_POSTS} from "../actionTypes";
 
 export const show = post => ({
   type: SHOW_POST,
@@ -9,6 +9,16 @@ export const show = post => ({
 
 export const loadPosts = posts => ({
   type: LOAD_POSTS,
+  posts
+});
+
+export const loadMyPosts = posts => ({
+  type: LOAD_MY_POSTS,
+  posts
+});
+
+export const loadMyFavorites = posts => ({
+  type: LOAD_MY_FAVORITES,
   posts
 });
 
@@ -32,7 +42,7 @@ export const removePost = (user_id, post_id) => {
 
 export const showPost = (post_id) => {
   return dispatch => {
-    return apiCall("get", `/api/posts/${post_id}`)
+    return apiCall("get", `/api/posts/show/${post_id}`)
       .then(res => {
         console.log(res);
         dispatch(show(res));
@@ -46,6 +56,30 @@ export const fetchPosts = () => {
     return apiCall("get", "/api/posts")
       .then(res => {
         dispatch(loadPosts(res));
+      })
+      .catch(err => {
+        dispatch(addError(err.message));
+      });
+  };
+};
+
+export const fetchMyPosts = (id) => {
+  return dispatch => {
+    return apiCall("get", `/api/posts/${id}`)
+      .then(res => {
+        dispatch(loadMyPosts(res));
+      })
+      .catch(err => {
+        dispatch(addError(err.message));
+      });
+  };
+};
+
+export const fetchMyFavorites = (id) => {
+  return dispatch => {
+    return apiCall("get", `/api/posts/${id}/favorites`)
+      .then(res => {
+        dispatch(loadMyFavorites(res));
       })
       .catch(err => {
         dispatch(addError(err.message));

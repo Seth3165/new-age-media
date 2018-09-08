@@ -30,12 +30,16 @@ class UserNav extends Component {
       );
     }
     return (
-      <div>
+      <div className="controlNav">
         <UserAside
           profileImageUrl={currentUser.user.profileImageUrl}
           username={currentUser.user.username}
         />
-         <Link to={`/users/${this.props.currentUser.user.id}/posts/new`}>New Post</Link>
+        <Link to={"/"} className="recpostButton">Recent Posts</Link>
+        <Link to={`/users/${this.props.currentUser.user.id}/posts`} className="mypostButton">My Posts</Link>
+        <Link to={`/users/${this.props.currentUser.user.id}/posts/favorites`} className="myfavButton">My Favorites</Link>
+        <Link to={`/users/${this.props.currentUser.user.id}/artists`} className="artistsButton">Artists</Link>
+        <Link to={`/users/${this.props.currentUser.user.id}/posts/new`} className="cpostButton">New Post</Link>
         <a className="loButton" onClick={this.logout}>Log out</a>
       </div>
     );

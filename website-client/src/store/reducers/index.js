@@ -3,12 +3,14 @@ import currentUser from "./currentUser";
 import errors from "./errors";
 import messages from "./messages";
 import posts from "./posts";
+import artists from "./profiles";
 
 const rootReducer = combineReducers({
   currentUser,
   errors,
   messages,
-  posts
+  posts,
+  artists
 });
 
 export default rootReducer;

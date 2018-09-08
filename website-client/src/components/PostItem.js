@@ -11,16 +11,16 @@ import DefaultProfileImg from "../images/default-profile-image.jpg";
 //   className="timeline-image"
 // />
 
-const PostItem = ({id, date, profileImageUrl, title, description, file, username, currentUser, removePost, isCorrectUser}) => (
+const PostItem = ({id, date, profileImageUrl, title, description, file, username, currentUser, isCorrectUser}) => (
   <Link to={`/users/${currentUser}/posts/${id}`} className="postItem">
-    <p>{title}</p>
-    <span>
+    <h1>{title}</h1>
+    <div>
       Created: 
       <Moment format="Do MMM YYYY">
         {date}
       </Moment>
-    </span>
-    <div>@{username} &nbsp;</div>
+      <div>By: {username}</div>
+    </div>
   </Link>
 );
 

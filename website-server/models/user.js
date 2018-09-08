@@ -26,6 +26,14 @@ const userSchema = new mongoose.Schema({
   posts: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Post"
+  }],
+  favorites: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post"
+  }],
+  artists: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
   }]
 });
 

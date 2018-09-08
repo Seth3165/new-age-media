@@ -7,8 +7,9 @@ const helmet = require('helmet');
 const methodOverride = require("method-override");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
+const profileRoutes = require("./routes/profile");
 const postsRoutes = require("./routes/posts");
-const postDisplayRoute = require("./routes/postdisplay");
+const postDisplayRoutes = require("./routes/postdisplay");
 const messagesRoutes = require("./routes/messages");
 const uploadsRoutes = require("./routes/uploads");
 const videoRoutes = require("./routes/videos");
@@ -22,6 +23,12 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 
 app.use("/api/auth", authRoutes);
+app.use(
+  "/api/users/:id/profile",
+  loginRequired, 
+  ensureCorrectUser,
+  profileRoutes
+);
 app.use(
   "/api/users/:id/posts",
   loginRequired, 
@@ -53,7 +60,7 @@ app.use(
 //     uniquePrefix: true // (4.0.2 and above) default is true, setting the attribute to false preserves the original filename in S3
 // }));
 
-app.use("/api/posts", loginRequired, postDisplayRoute);
+app.use("/api/posts", loginRequired, postDisplayRoutes);
 
 app.use("/video", videoRoutes);
 

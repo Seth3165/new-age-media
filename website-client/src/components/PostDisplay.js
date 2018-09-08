@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import { showPost, removePost, refreshPosts } from "../store/actions/posts";
+import { addFavorite, addArtist } from "../store/actions/profiles";
 import PostView from "../components/PostView";
 
 class PostDisplay extends Component {
@@ -16,7 +17,7 @@ class PostDisplay extends Component {
   }
   
   render() {
-    const {posts, removePost, currentUser} = this.props;
+    const {posts, addFavorite, addArtist, removePost, currentUser} = this.props;
     console.log(posts);
     let postDis = posts.map(p => (
       <PostView
@@ -29,15 +30,14 @@ class PostDisplay extends Component {
         username={p.user.username}
         profileImageUrl={p.user.profileImageUrl}
         currentUser={currentUser}
+        addFavorite={addFavorite.bind(this, p._id)}
+        addArtist={addArtist.bind(this, p.user._id)}
         removePost={removePost.bind(this, p.user._id, p._id)}
         isCorrectUser={currentUser === p.user._id}
       />
     ));
     return (
-        <div className="">
-        <h1>hi</h1>
-        <h1>{postDis}</h1>
-        </div>
+        <div className="displayControl">{postDis}</div>
       );
   }
 }
@@ -49,4 +49,4 @@ function mapStateToProps(state){
   };
 }
 
-export default connect(mapStateToProps, {showPost, removePost, refreshPosts})(PostDisplay);
+export default connect(mapStateToProps, {showPost, addFavorite, addArtist, removePost, refreshPosts})(PostDisplay);

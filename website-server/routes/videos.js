@@ -114,23 +114,23 @@ router.get('/:username/:filename', (req, res, next) => {
   
   // res.set('Content-Type', 'video/mp4');
   
-  // stream.pipe(res);
+  stream.pipe(res);
   
   // const proc = new ffmpeg(stream).pipe();
   
-  ffmpeg(stream)
-  .videoCodec('libx264')
-  .audioCodec('aac')
-  .outputOptions('-movflags frag_keyframe+empty_moov')
-  .format('mp4')
-  .on('error', function(err, stdout, stderr) {
-    console.log('An error occurred: ' + err.message);
-    console.log("ffmpeg stdout:\n" + stdout);
-    console.log("ffmpeg stderr:\n" + stderr);
-  })
-  .on('end', function() {
-    console.log('Processing finished !');
-  }).pipe(res, {end: true});
+  // ffmpeg(stream)
+  // .videoCodec('libx264')
+  // .audioCodec('aac')
+  // .outputOptions('-movflags frag_keyframe+empty_moov')
+  // .format('mp4')
+  // .on('error', function(err, stdout, stderr) {
+  //   console.log('An error occurred: ' + err.message);
+  //   console.log("ffmpeg stdout:\n" + stdout);
+  //   console.log("ffmpeg stderr:\n" + stderr);
+  // })
+  // .on('end', function() {
+  //   console.log('Processing finished !');
+  // }).pipe(res, {end: true});
 
   // let ffstream = command.pipe(res, {end: true});
   

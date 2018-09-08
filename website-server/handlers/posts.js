@@ -48,6 +48,36 @@ exports.showPosts = async function (req, res, next) {
   }
 };
 
+exports.showMyPosts = async function (req, res, next) {
+  try {
+    let posts = await db.Post.find({user: req.params.id})
+      .sort({ createdAt: "desc" })
+      .populate("user", {
+        username: true,
+        profileImageUrl: true
+      });
+    return res.status(200).json(posts);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.showMyFavorites = async function (req, res, next) {
+  try {
+    let foundUser = await db.User.findById(req.params.id);
+    let favs = foundUser.favorites;
+    let posts = await db.Post.find({_id: {$in: favs}})
+      .sort({ createdAt: "desc" })
+      .populate("user", {
+        username: true,
+        profileImageUrl: true
+      });
+    return res.status(200).json(posts);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 exports.deletePost = async function (req, res, next) {
   try {
     let foundPost = await db.Post.findById(req.params.post_id);
