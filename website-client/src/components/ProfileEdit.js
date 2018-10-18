@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-export default class AuthForm extends Component {
+export default class ProfileEdit extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -31,25 +31,12 @@ export default class AuthForm extends Component {
   render(){
     const {email, username, password, profileImageUrl} = this.state;
     const {
-      heading, 
-      buttonText, 
-      signUp, 
-      errors, 
-      history, 
-      removeError
+      currentUser
     } = this.props;
-    
-    history.listen(()=> {
-      removeError();
-    });
     
     return(
         <div>
           <form className="authForm" onSubmit={this.handleSubmit}>
-            <h2>{heading}</h2>
-            {errors.message && (
-              <div>{errors.message}</div>
-            )}
             <label htmlFor="email">Email:</label>
             <input 
               id="email" 
@@ -66,28 +53,24 @@ export default class AuthForm extends Component {
               value={password}
               type="password"
             />
-            {signUp && (
-              <div>
-                <label htmlFor="username">Username:</label>
-                <input 
-                  id="username" 
-                  name="username" 
-                  onChange={this.handleChange}
-                  value={username}
-                  type="text"
-                />
-                <label htmlFor="image-url">Profile Image:</label>
-                <input 
-                  id="image-url" 
-                  name="profileImageUrl" 
-                  onChange={this.handleChange}
-                  type="text"
-                  value={profileImageUrl}
-                />
-              </div>
-            )}
+            <label htmlFor="username">Username:</label>
+            <input 
+              id="username" 
+              name="username" 
+              onChange={this.handleChange}
+              value={username}
+              type="text"
+            />
+            <label htmlFor="image-url">Profile Image:</label>
+            <input 
+              id="image-url" 
+              name="profileImageUrl" 
+              onChange={this.handleChange}
+              type="text"
+              value={profileImageUrl}
+            />
             <button className="authBtn" type="submit">
-              {buttonText}
+              Save Profile
             </button>
           </form>
         </div>

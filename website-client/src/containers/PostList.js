@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import { fetchPosts, removePost, refreshPosts } from "../store/actions/posts";
 import PostItem from "../components/PostItem";
 // import PostItem from "../components/MessageItem";
+// import ReactCSSTransitionGroup from "react-transition-group";
+import { Fade, Stagger } from 'react-animation-components'
 import {AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} from "../keys";
 const AWS = require("aws-sdk");
 
@@ -38,8 +40,8 @@ class PostList extends Component {
         currentUser={currentUser}
         removePost={removePost.bind(this, p.user._id, p._id)}
         isCorrectUser={currentUser === p.user._id}
-      />
-    ));
+        />
+      ));
     return (
       <div className="recentPosts">
         <h1>Recent Posts</h1>

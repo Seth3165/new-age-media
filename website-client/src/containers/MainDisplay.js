@@ -10,6 +10,8 @@ import MyPostList from "./MyPostList";
 import MyFavoriteList from "./MyFavoriteList";
 import ArtistList from "./ArtistList";
 import PostDisplay from "../components/PostDisplay";
+import ProfileEdit from "../components/ProfileEdit";
+import ProfileDisplay from "../components/ProfileDisplay";
 
 const MainDisplay = props => {
   const {errors, removeError, currentUser} = props;
@@ -30,6 +32,8 @@ const MainDisplay = props => {
         <Route path="/users/:id/posts/:post_id" render={props => <PostDisplay currentUser={currentUser} {...props}/>}/>
         <Route path="/users/:id/posts" render={props => <MyPostList currentUser={currentUser} {...props}/>}/>
         <Route path="/users/:id/artists" render={props => <ArtistList currentUser={currentUser} {...props}/>}/>
+        <Route path="/users/:id/profile/edit" render={props => <ProfileEdit currentUser={currentUser} {...props}/>}/>
+        <Route path="/users/:id/profile/:artist_id" render={props => <ProfileDisplay currentUser={currentUser} {...props}/>}/>
         <Route path="/" render={props => <PostList currentUser={currentUser} {...props}/>}/>
       </Switch>
     </div>

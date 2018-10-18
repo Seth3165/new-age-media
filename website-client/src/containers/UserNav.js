@@ -34,6 +34,7 @@ class UserNav extends Component {
         <UserAside
           profileImageUrl={currentUser.user.profileImageUrl}
           username={currentUser.user.username}
+          myid={currentUser.user.id}
         />
         <Link to={"/"} className="recpostButton">Recent Posts</Link>
         <Link to={`/users/${this.props.currentUser.user.id}/posts`} className="mypostButton">My Posts</Link>

@@ -24,6 +24,18 @@ exports.addArtist = async function (req, res, next) {
   }
 };
 
+exports.showArtist = async function (req, res, next) {
+  try {
+    let user = await db.User.findById(req.params.artist_id);
+    // .populate("posts", {
+    //   title: true,
+    // });
+    return res.status(200).json(user);
+  } catch(err) {
+    return next(err);
+  }
+};
+
 exports.showArtists = async function (req, res, next) {
   try {
     let foundUser = await db.User.findById(req.params.id);

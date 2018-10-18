@@ -24,7 +24,7 @@ const App = () => (
   <Provider store={store}>
     <Router>
       <div>
-        <header><h1>New Age Media</h1></header>
+        <header className="mainTitle"><h1>New Age Media</h1></header>
         <div className="appViewport">
           <MainNav/>
           <MainDisplay/>

@@ -19,6 +19,9 @@ const userSchema = new mongoose.Schema({
   profileImageUrl: {
     type:String
   },
+  bio: {
+    type:String
+  },
   messages: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Message"

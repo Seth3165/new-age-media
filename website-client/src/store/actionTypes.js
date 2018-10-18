@@ -9,6 +9,7 @@ export const LOAD_MY_POSTS = "LOAD_MY_POSTS";
 export const LOAD_MY_FAVORITES = "LOAD_MY_FAVORITES";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const ADD_ARTIST = "ADD_ARTIST";
+export const SHOW_ARTIST = "SHOW_ARTIST";
 export const LOAD_ARTISTS = "LOAD_ARTISTS";
 export const REMOVE_POST = "REMOVE_POST";
 export const REINSTANCE_POSTS = "REINSTANCE_POSTS";
