@@ -1,4 +1,5 @@
 import {combineReducers} from "redux";
+import { reducer as formReducer } from "redux-form";
 import currentUser from "./currentUser";
 import errors from "./errors";
 import messages from "./messages";
@@ -10,7 +11,8 @@ const rootReducer = combineReducers({
   errors,
   messages,
   posts,
-  artists
+  artists,
+  form: formReducer
 });
 
 export default rootReducer;

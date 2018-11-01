@@ -1,0 +1,49 @@
+html {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background: #2193b0;
+  background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);
+  background: linear-gradient(to bottom, #6dd5ed, #2193b0) no-repeat center center fixed;
+
+}
+
+body {
+
+}
+
+.appViewport {
+  display: flex;
+  justify-content: space-around;
+  opacity: 0;
+  animation: 1s appload 0s forwards;
+  height: 100%;
+}
+
+@keyframes appload {
+  100% {
+    opacity: 1;
+  }
+}
+
+.navContainer, .displayContainer, .scrollContainer {
+  border-radius: 10px;
+  border: solid lightblue 2em;
+  background: #364EEB;
+}
+
+.mainTitle {
+  opacity: 0;
+  animation: 1s maintitleload 0.5s forwards;
+}
+
+@keyframes maintitleload {
+  100% {
+    opacity: 1;
+  }
+}
+
+header{
+  text-align: center;
+}
