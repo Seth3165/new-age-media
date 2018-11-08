@@ -1,10 +1,11 @@
 import {combineReducers} from "redux";
-import { reducer as formReducer } from "redux-form";
 import currentUser from "./currentUser";
 import errors from "./errors";
 import messages from "./messages";
 import posts from "./posts";
 import artists from "./profiles";
+import { reducer as formReducer } from "redux-form";
+// import editformPluginReducer from "./formReducers.js";
 
 const rootReducer = combineReducers({
   currentUser,

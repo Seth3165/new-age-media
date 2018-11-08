@@ -1,11 +1,13 @@
 import {apiCall} from "../../services/api";
 import {addError} from "./errors";
-import { ADD_FAVORITE, ADD_ARTIST, SHOW_ARTIST, LOAD_ARTISTS } from "../actionTypes";
+import { ADD_FAVORITE, ADD_ARTIST, SHOW_ARTIST, EDIT_USER, LOAD_ARTISTS } from "../actionTypes";
 
 export const show = artist => ({
   type: SHOW_ARTIST,
   artist
 });
+
+export const editUser = (artist) => ({ type: EDIT_USER, artist });
 
 export const loadArtists = artists => ({
   type: LOAD_ARTISTS,
@@ -43,6 +45,30 @@ export const fetchArtist = (id, artist_id) => {
       });
   };
 };
+
+export const retrieveUser = (artist_id) => {
+  return dispatch => {
+    return apiCall("get", `/api/users/${artist_id}/profile/show/${artist_id}`)
+      .then(res => {
+        dispatch(editUser(res));
+      })
+      .catch(err => {
+        dispatch(addError(err.message));
+      });
+  };
+};
+
+// export const editArtist = (id) => {
+//   return dispatch => {
+//     return apiCall("get", `/api/users/${id}/profile/show/${id}`)
+//       .then(res => {
+//         dispatch(editUser(res));
+//       })
+//       .catch(err => {
+//         dispatch(addError(err.message));
+//       });
+//   };
+// };
 
 export const fetchArtists = (id) => {
   return dispatch => {

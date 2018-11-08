@@ -36,7 +36,7 @@ const MainDisplay = props => {
         <Route path="/users/:id/posts/:post_id" render={props => <PostDisplay currentUser={currentUser} {...props}/>}/>
         <Route path="/users/:id/posts" render={props => <MyPostList currentUser={currentUser} {...props}/>}/>
         <Route path="/users/:id/artists" render={props => <ArtistList currentUser={currentUser} {...props}/>}/>
-        <Route path="/users/:id/profile/edit" render={props => <EditPage currentUser={currentUser}   {...props}/>}/>
+        <Route path="/users/:id/profile/edit" render={props => <ProfileEdit currentUser={currentUser}   {...props}/>}/>
         <Route path="/users/:id/profile/:artist_id" render={props => <ProfileDisplay currentUser={currentUser} {...props}/>}/>
         <Route path="/" render={props => <PostList currentUser={currentUser} {...props}/>}/>
       </Switch>
