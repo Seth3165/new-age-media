@@ -1,9 +1,12 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import { fetchArtists } from "../store/actions/profiles";
+import { fetchArtists, refreshArtists } from "../store/actions/profiles";
 import ArtistItem from "../components/ArtistItem";
 
 class ArtistList extends Component {
+  componentWillMount() {
+    this.props.refreshArtists();
+  }
   
   componentDidMount() {
     const {id} = this.props.match.params;
@@ -40,4 +43,4 @@ function mapStateToProps(state){
   };
 }
 
-export default connect(mapStateToProps, {fetchArtists})(ArtistList);
+export default connect(mapStateToProps, {fetchArtists, refreshArtists})(ArtistList);

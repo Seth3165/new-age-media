@@ -51,9 +51,9 @@ export const showPost = (post_id) => {
   };
 };
 
-export const fetchPosts = () => {
+export const fetchPosts = (pageNumber) => {
   return dispatch => {
-    return apiCall("get", "/api/posts")
+    return apiCall("get", `/api/posts/page/num/${pageNumber}`)
       .then(res => {
         dispatch(loadPosts(res));
       })

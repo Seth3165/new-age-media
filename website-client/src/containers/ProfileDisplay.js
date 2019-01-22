@@ -1,9 +1,13 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import { fetchArtist } from "../store/actions/profiles";
+import { fetchArtist, refreshArtists } from "../store/actions/profiles";
 import ArtistInfo from "../components/ArtistInfo";
+import ArtistPostList from "./ArtistPostList";
 
 class ProfileDisplay extends Component {
+  componentWillMount(){
+    this.props.refreshArtists();
+  }
   
   componentDidMount() {
     const {id} = this.props.match.params;
@@ -13,7 +17,7 @@ class ProfileDisplay extends Component {
   }
   
   render() {
-    const {artists, currentUser} = this.props;
+    const {artists, currentUser, isProfileUser} = this.props;
     let artistDisp = artists.map(a => (
       <ArtistInfo 
         key={a._id}
@@ -24,12 +28,21 @@ class ProfileDisplay extends Component {
         currentUser={currentUser}
       />
     ));
+    let artistPList = artists.map(a => (
+      <ArtistPostList
+        key={a._id}
+        id={a._id}
+        currentUser={currentUser}
+      />
+    ));
     return (
       <div className="profileDisplay">
-        <h1>My Profile</h1>
+        {isProfileUser && (<h1>My Profile</h1>)}
+        {!isProfileUser && (<h1>Artist Profile</h1>)}
         <div className="">
           {artistDisp}
         </div>
+          {artistPList}
       </div>
     );
   }
@@ -42,4 +55,4 @@ function mapStateToProps(state){
   };
 }
 
-export default connect(mapStateToProps, {fetchArtist})(ProfileDisplay);
+export default connect(mapStateToProps, {fetchArtist, refreshArtists})(ProfileDisplay);

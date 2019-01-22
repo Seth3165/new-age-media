@@ -2,20 +2,20 @@ const express = require("express");
 const router = express.Router({mergeParams: true});
 
 const { 
-  getPost,
-  showPosts,
-  showMyPosts,
-  showMyFavorites
+  showPost,
+  getPosts,
+  getMyPosts,
+  getMyFavorites
 } = require("../handlers/posts");
 
-router.route("/:id/favorites").get(showMyFavorites);
+router.route("/:id/favorites").get(getMyFavorites);
 
-router.route("/:id").get(showMyPosts);
+router.route("/:id").get(getMyPosts);
 
-router.route("/").get(showPosts);
+router.route("/page/num/:pageNumber").get(getPosts);
 
 router
   .route("/show/:post_id")
-  .get(getPost);
+  .get(showPost);
 
 module.exports = router;

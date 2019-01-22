@@ -4,6 +4,7 @@ import { fetchPosts, removePost, refreshPosts } from "../store/actions/posts";
 import PostItem from "../components/PostItem";
 // import PostItem from "../components/MessageItem";
 // import ReactCSSTransitionGroup from "react-transition-group";
+import Pagination from "react-js-pagination";
 import { Fade, Stagger } from 'react-animation-components'
 import {AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} from "../keys";
 const AWS = require("aws-sdk");
@@ -17,12 +18,24 @@ const config = {
 };
 
 class PostList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activePage: 1
+    };
+  }
+  
   componentWillMount() {
     this.props.refreshPosts();
   }
   
   componentDidMount() {
-    this.props.fetchPosts();
+    this.props.fetchPosts(this.state.activePage);
+  }
+  
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({activePage: pageNumber});
   }
   
   render() {
@@ -48,6 +61,13 @@ class PostList extends Component {
         <div className="postList">
           {postList}
         </div>
+        <Pagination
+          activePage={this.state.activePage}
+          itemsCountPerPage={5}
+          totalItemsCount={450}
+          pageRangeDisplayed={5}
+          onChange={this.handlePageChange}
+        />
       </div>
     );
   }

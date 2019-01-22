@@ -21,7 +21,7 @@ exports.createPost = async function (req, res, next) {
   }
 };
 
-exports.getPost = async function (req, res, next) {
+exports.showPost = async function (req, res, next) {
   try {
     let post = await db.Post.findById(req.params.post_id)
     .populate("user", {
@@ -34,10 +34,12 @@ exports.getPost = async function (req, res, next) {
   }
 };
 
-exports.showPosts = async function (req, res, next) {
+exports.getPosts = async function (req, res, next) {
   try {
     let posts = await db.Post.find()
       .sort({ createdAt: "desc" })
+      .skip( req.params.pageNumber > 1 ? 0: ( ( req.params.pageNumber - 1 ) * 5 ))
+             .limit( 5 )
       .populate("user", {
         username: true,
         profileImageUrl: true
@@ -48,7 +50,7 @@ exports.showPosts = async function (req, res, next) {
   }
 };
 
-exports.showMyPosts = async function (req, res, next) {
+exports.getMyPosts = async function (req, res, next) {
   try {
     let posts = await db.Post.find({user: req.params.id})
       .sort({ createdAt: "desc" })
@@ -62,7 +64,7 @@ exports.showMyPosts = async function (req, res, next) {
   }
 };
 
-exports.showMyFavorites = async function (req, res, next) {
+exports.getMyFavorites = async function (req, res, next) {
   try {
     let foundUser = await db.User.findById(req.params.id);
     let favs = foundUser.favorites;

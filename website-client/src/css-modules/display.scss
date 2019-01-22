@@ -7,6 +7,17 @@
   justify-content: center;
 }
 
+.displayContainer h1 {
+  opacity: 0;
+  animation: 1s displayheaderload 0.5s linear forwards
+}
+
+@keyframes displayheaderload {
+  100% {
+    opacity: 1;
+  }
+}
+
 .profileDisplay h1{
   text-align: center;
 }
@@ -148,6 +159,33 @@
   100% {
     color: #90C3D4;
   }
+}
+
+.profilePostList{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 50%;
+}
+
+.profilePostItem{
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #11998e;
+  background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
+  background: linear-gradient(to right, #38ef7d, #11998e);
+
+  border: .2em;
+  /*border-image: linear-gradient(to right, #ffe259, #ffa751);*/
+  border-color: #ffa751;
+  /*border-left-color: #ffe259;*/
+  border-style: outset;
+  border-radius: 5px;
+  height: 20%;
+  width: 80%;
+  // padding: .2em;
 }
 
 .myPosts {

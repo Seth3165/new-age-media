@@ -1,4 +1,4 @@
-import { SHOW_ARTIST, LOAD_ARTISTS } from "../actionTypes";
+import { SHOW_ARTIST, LOAD_ARTISTS, REINSTANCE_ARTISTS } from "../actionTypes";
 
 const artist = (state= [], action) => {
   switch(action.type) {
@@ -6,6 +6,8 @@ const artist = (state= [], action) => {
       return [action.artist];
     case LOAD_ARTISTS:
       return [...action.artists];
+    case REINSTANCE_ARTISTS:
+      return [];
     default:
       return state;
   }

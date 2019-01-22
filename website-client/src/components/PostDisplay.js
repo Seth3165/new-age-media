@@ -17,7 +17,7 @@ class PostDisplay extends Component {
   }
   
   render() {
-    const {posts, addFavorite, addArtist, removePost, currentUser} = this.props;
+    const {posts, addFavorite, addArtist, removePost, currentUser, isProfileUser} = this.props;
     console.log(posts);
     let postDis = posts.map(p => (
       <PostView
@@ -28,6 +28,7 @@ class PostDisplay extends Component {
         description={p.description}
         file={p.file}
         username={p.user.username}
+        authorID={p.user._id}
         profileImageUrl={p.user.profileImageUrl}
         currentUser={currentUser}
         addFavorite={addFavorite.bind(this, p._id)}

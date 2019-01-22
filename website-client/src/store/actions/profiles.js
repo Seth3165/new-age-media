@@ -1,6 +1,6 @@
 import {apiCall} from "../../services/api";
 import {addError} from "./errors";
-import { ADD_FAVORITE, ADD_ARTIST, SHOW_ARTIST, EDIT_USER, LOAD_ARTISTS } from "../actionTypes";
+import { ADD_FAVORITE, ADD_ARTIST, SHOW_ARTIST, EDIT_USER, LOAD_ARTISTS, REINSTANCE_ARTISTS } from "../actionTypes";
 
 export const show = artist => ({
   type: SHOW_ARTIST,
@@ -12,6 +12,11 @@ export const editUser = (artist) => ({ type: EDIT_USER, artist });
 export const loadArtists = artists => ({
   type: LOAD_ARTISTS,
   artists
+});
+
+export const reinstanceArtists = posts => ({
+  type: REINSTANCE_ARTISTS,
+  posts
 });
 
 export const addFavorite = (post_id) => (dispatch, getState) => {
@@ -80,4 +85,8 @@ export const fetchArtists = (id) => {
         dispatch(addError(err.message));
       });
   };
+};
+
+export const refreshArtists = () => {
+  return dispatch => dispatch(reinstanceArtists());
 };

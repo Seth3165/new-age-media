@@ -8,7 +8,9 @@ const ScrollNav = props => {
   const {errors, removeError, currentUser} = props;
   
   return(
-    <div className="scrollContainer"></div>
+    <div className="scrollContainer">
+      <h1>News</h1>
+    </div>
   );
 };
 
