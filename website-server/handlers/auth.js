@@ -6,14 +6,15 @@ exports.signin = async function(req, res, next){
     let user = await db.User.findOne({
       email: req.body.email
     });
-    let {id, username, profileImageUrl} = user;
+    let {id, username, profileImageUrl, isAdmin} = user;
     let isMatch = await user.comparePassword(req.body.password);
     if(isMatch){
       let token = jwt.sign(
         {
           id,
           username,
-          profileImageUrl
+          profileImageUrl,
+          isAdmin
         },
         process.env.SECRET_KEY
       );
@@ -21,6 +22,7 @@ exports.signin = async function(req, res, next){
         id,
         username,
         profileImageUrl,
+        isAdmin,
         token
       });
     } else {
@@ -34,15 +36,28 @@ exports.signin = async function(req, res, next){
   }
 };
 
+// if(req.body.code === "testtest"){
+//       user.isAdmin = true;
+//       await user.save();
+//     }
+
 exports.signup = async function(req, res, next){
   try {
     let user = await db.User.create(req.body);
-    let {id, username, profileImageUrl} = user;
+    if(req.body.code === "testtest"){
+      let foundUser = await db.User.findOne({
+        email: req.body.email
+      });
+      foundUser.isAdmin = true;
+      await foundUser.save();
+    }
+    let {id, username, profileImageUrl, isAdmin} = user;
     let token = jwt.sign(
       {
         id,
         username,
-        profileImageUrl
+        profileImageUrl,
+        isAdmin
       },
       process.env.SECRET_KEY
     );
@@ -50,6 +65,7 @@ exports.signup = async function(req, res, next){
       id, 
       username,
       profileImageUrl,
+      isAdmin,
       token
     });
   } catch(err) {

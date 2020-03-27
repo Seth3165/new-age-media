@@ -5,6 +5,7 @@ exports.createPost = async function (req, res, next) {
     let post = await db.Post.create({
       title: req.body.title,
       description: req.body.description,
+      gallerytype: req.body.gallerytype,
       file: req.body.filename,
       user: req.params.id
     });
@@ -38,7 +39,7 @@ exports.getPosts = async function (req, res, next) {
   try {
     let posts = await db.Post.find()
       .sort({ createdAt: "desc" })
-      .skip( req.params.pageNumber > 1 ? 0: ( ( req.params.pageNumber - 1 ) * 5 ))
+      .skip( req.params.pageNumber > 1 ? ( ( req.params.pageNumber - 1 ) * 5 ) : 0)
              .limit( 5 )
       .populate("user", {
         username: true,
@@ -54,6 +55,8 @@ exports.getMyPosts = async function (req, res, next) {
   try {
     let posts = await db.Post.find({user: req.params.id})
       .sort({ createdAt: "desc" })
+      .skip( req.params.pageNumber > 1 ? ( ( req.params.pageNumber - 1 ) * 5 ) :0 )
+             .limit( 5 )
       .populate("user", {
         username: true,
         profileImageUrl: true
@@ -70,6 +73,8 @@ exports.getMyFavorites = async function (req, res, next) {
     let favs = foundUser.favorites;
     let posts = await db.Post.find({_id: {$in: favs}})
       .sort({ createdAt: "desc" })
+      .skip( req.params.pageNumber > 1 ? ( ( req.params.pageNumber - 1 ) * 5 ) : 0)
+             .limit( 5 )
       .populate("user", {
         username: true,
         profileImageUrl: true
@@ -85,7 +90,17 @@ exports.deletePost = async function (req, res, next) {
     let foundPost = await db.Post.findById(req.params.post_id);
     await foundPost.remove();
     return res.status(200).json(foundPost);
-  } catch(err) {
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.countPosts = async function (req, res, next) {
+  try {
+    let count = await db.Post.count();
+    console.log(count)
+    return res.status(200).json(count);
+  } catch (err) {
     return next(err);
   }
 };

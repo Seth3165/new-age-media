@@ -6,5 +6,6 @@ mongoose.connect("mongodb://localhost/namdevdb", {
 });
 
 module.exports.User = require("./user");
-module.exports.Message = require("./message");
 module.exports.Post = require("./post");
+module.exports.Message = require("./message");
+module.exports.News = require("./news");

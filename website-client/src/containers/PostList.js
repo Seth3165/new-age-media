@@ -1,11 +1,17 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import { fetchPosts, removePost, refreshPosts } from "../store/actions/posts";
+import {countTotalPosts} from "../store/actions/count";
 import PostItem from "../components/PostItem";
 // import PostItem from "../components/MessageItem";
 // import ReactCSSTransitionGroup from "react-transition-group";
 import Pagination from "react-js-pagination";
-import { Fade, Stagger } from 'react-animation-components'
+// import ReactPaginate from 'react-paginate';
+// @import "../../node_modules/bootstrap/scss/functions";
+// @import "../../node_modules/bootstrap/scss/variables";
+// @import "../../node_modules/bootstrap/scss/mixins";
+// @import '../../node_modules/bootstrap/scss/_pagination';
+// import { Fade, Stagger } from 'react-animation-components'
 import {AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} from "../keys";
 const AWS = require("aws-sdk");
 
@@ -23,10 +29,14 @@ class PostList extends Component {
     this.state = {
       activePage: 1
     };
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
   
   componentWillMount() {
     this.props.refreshPosts();
+    this.props.countTotalPosts();
+    // console.log(totalPostCount);
+    // this.setState({itemCount: totalPostCount});
   }
   
   componentDidMount() {
@@ -34,12 +44,16 @@ class PostList extends Component {
   }
   
   handlePageChange(pageNumber) {
-    console.log(`active page is ${pageNumber}`);
     this.setState({activePage: pageNumber});
+    console.log(`active page is ${pageNumber}`);
+    console.log(this.state.activePage);
+    this.props.refreshPosts();
+    this.props.fetchPosts(pageNumber);
   }
   
   render() {
-    const {posts, removePost, currentUser} = this.props;
+    const {posts, count, removePost, currentUser} = this.props;
+    console.log(count);
     let postList = posts.map(p => (
       <PostItem 
         key={p._id}
@@ -51,10 +65,11 @@ class PostList extends Component {
         username={p.user.username}
         profileImageUrl={p.user.profileImageUrl}
         currentUser={currentUser}
-        removePost={removePost.bind(this, p.user._id, p._id)}
+        removePost={removePost.bind(this, p.user._id, p._id, p.file)}
         isCorrectUser={currentUser === p.user._id}
         />
       ));
+      // console.log(postList);
     return (
       <div className="recentPosts">
         <h1>Recent Posts</h1>
@@ -64,7 +79,7 @@ class PostList extends Component {
         <Pagination
           activePage={this.state.activePage}
           itemsCountPerPage={5}
-          totalItemsCount={450}
+          totalItemsCount={count[0]}
           pageRangeDisplayed={5}
           onChange={this.handlePageChange}
         />
@@ -76,8 +91,9 @@ class PostList extends Component {
 function mapStateToProps(state){
   return {
     posts: state.posts,
+    count: state.count,
     currentUser: state.currentUser.user.id
   };
 }
 
-export default connect(mapStateToProps, {fetchPosts, removePost, refreshPosts})(PostList);
+export default connect(mapStateToProps, {fetchPosts, removePost, refreshPosts, countTotalPosts})(PostList);

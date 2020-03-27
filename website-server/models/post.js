@@ -11,6 +11,10 @@ var postSchema = new mongoose.Schema({
      default: "No description provided",
      maxLength: 640
   },
+  gallerytype: {
+    type: String,
+    required: true
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -19,6 +23,10 @@ var postSchema = new mongoose.Schema({
   file: {
     type: String,
     required: true
+  },
+  messages: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Message"
   }
 }, {
   timestamps:true

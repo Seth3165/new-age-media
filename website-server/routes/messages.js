@@ -3,15 +3,16 @@ const router = express.Router({mergeParams: true});
 
 const {
   createMessage, 
-  getMessage,
+  getMessages,
   deleteMessage
 } = require("../handlers/messages");
 
-router.route("/").post(createMessage);
+router.route("/");
 
 router
-  .route("/:message_id")
-  .get(getMessage)
+  .route("/:post_id")
+  .post(createMessage)
+  .get(getMessages)
   .delete(deleteMessage);
 
 module.exports = router;

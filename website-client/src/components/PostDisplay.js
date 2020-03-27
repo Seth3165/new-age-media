@@ -26,6 +26,7 @@ class PostDisplay extends Component {
         date={p.createAt} 
         title={p.title}
         description={p.description}
+        gallerytype={p.gallerytype}
         file={p.file}
         username={p.user.username}
         authorID={p.user._id}
@@ -33,7 +34,7 @@ class PostDisplay extends Component {
         currentUser={currentUser}
         addFavorite={addFavorite.bind(this, p._id)}
         addArtist={addArtist.bind(this, p.user._id)}
-        removePost={removePost.bind(this, p.user._id, p._id)}
+        removePost={removePost.bind(this, p.user._id, p._id, p.file)}
         isCorrectUser={currentUser === p.user._id}
       />
     ));

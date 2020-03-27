@@ -14,9 +14,9 @@ export const loadArtists = artists => ({
   artists
 });
 
-export const reinstanceArtists = posts => ({
+export const reinstanceArtists = artists => ({
   type: REINSTANCE_ARTISTS,
-  posts
+  artists
 });
 
 export const addFavorite = (post_id) => (dispatch, getState) => {

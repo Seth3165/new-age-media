@@ -2,10 +2,12 @@ import React from "react";
 import {Switch, Route, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {removeError} from "../store/actions/errors";
+// import {countTotalPosts} from "../store/actions/posts";
 // import {editUser} from "../store/actions/profiles";
 import withAuth from "../hocs/withAuth";
 import FrontDisplay from "../components/FrontDisplay";
-import PostForm from "../containers/PostForm";
+import NewsForm from "./NewsForm"
+import PostForm from "./PostForm";
 import PostList from "./PostList";
 import MyPostList from "./MyPostList";
 import MyFavoriteList from "./MyFavoriteList";
@@ -28,6 +30,7 @@ const MainDisplay = props => {
   return(
     <div className="displayContainer">
       <Switch>
+        <Route path="/users/:id/news/addnews" render={props => <NewsForm currentUser={currentUser}   {...props}/>}/>
         <Route
           path="/users/:id/posts/new"
           currentUser={currentUser}
@@ -55,5 +58,5 @@ function mapStateToProps(state){
 // editUser,
 
 export default withRouter(
-  connect(mapStateToProps, {  removeError })(MainDisplay)
+  connect(mapStateToProps, {  removeError  })(MainDisplay)
 );

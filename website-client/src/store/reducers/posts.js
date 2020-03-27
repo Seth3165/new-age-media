@@ -1,4 +1,4 @@
-import {SHOW_POST, LOAD_POSTS, LOAD_MY_POSTS, LOAD_MY_FAVORITES, REMOVE_POST, REINSTANCE_POSTS} from "../actionTypes";
+import {SHOW_POST, LOAD_POSTS, LOAD_MY_POSTS, LOAD_MY_FAVORITES, REMOVE_POST, REINSTANCE_POSTS, COUNT_POSTS} from "../actionTypes";
 
 const post = (state= [], action) => {
   switch(action.type) {
@@ -14,6 +14,8 @@ const post = (state= [], action) => {
       return state.filter(post => post._id !== action.id);
     case REINSTANCE_POSTS:
       return [];
+    case COUNT_POSTS:
+      return state;
     default:
       return state;
   }

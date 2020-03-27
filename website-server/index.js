@@ -8,9 +8,11 @@ const methodOverride = require("method-override");
 const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
-const postsRoutes = require("./routes/posts");
+const newsRoutes = require("./routes/news");
+const newsDisplayRoutes = require("./routes/newsdisplay")
+const postRoutes = require("./routes/posts");
 const postDisplayRoutes = require("./routes/postdisplay");
-const messagesRoutes = require("./routes/messages");
+const messageRoutes = require("./routes/messages");
 const uploadsRoutes = require("./routes/uploads");
 const videoRoutes = require("./routes/videos");
 const {loginRequired, ensureCorrectUser} = require("./middleware/auth");
@@ -30,16 +32,22 @@ app.use(
   profileRoutes
 );
 app.use(
+  "/api/users/:id/news",
+  loginRequired, 
+  ensureCorrectUser,
+  newsRoutes
+);
+app.use(
   "/api/users/:id/posts",
   loginRequired, 
   ensureCorrectUser,
-  postsRoutes
+  postRoutes
 );
 app.use(
   "/api/users/:id/messages",
   loginRequired, 
   ensureCorrectUser, 
-  messagesRoutes
+  messageRoutes
 );
   
 // app.get('/aws/sign', uploadsRoutes.signedRequest);
@@ -59,6 +67,8 @@ app.use(
 //     ACL: 'private', // this is default
 //     uniquePrefix: true // (4.0.2 and above) default is true, setting the attribute to false preserves the original filename in S3
 // }));
+
+app.use("/api/news", newsDisplayRoutes);
 
 app.use("/api/posts", loginRequired, postDisplayRoutes);
 

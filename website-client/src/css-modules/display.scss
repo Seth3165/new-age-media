@@ -9,6 +9,7 @@
 
 .displayContainer h1 {
   opacity: 0;
+  color: darkgreen;
   animation: 1s displayheaderload 0.5s linear forwards
 }
 
@@ -51,6 +52,10 @@
   100% {
     opacity: 1;
   }
+}
+
+.pageNav{
+  
 }
 
 .postList{
@@ -112,17 +117,16 @@
   align-items: center;
   opacity: 0;
   animation: postitemload 1s linear forwards;
+  &:hover {
+    border: solid grey 0.2em;
+    padding: 1.3em;
+  }
 }
 
 @keyframes postitemload {
   100% {
     opacity: 1;
   }
-}
-
-.postItem:hover {
-  border: solid grey 0.2em;
-  padding: 1.3em;
 }
 
 .postItem h1 {
@@ -206,33 +210,280 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .viewTitle {
-  border: .2em solid lightblue;
-  border-radius: .1em;
-  /*width: 15%;*/
-  /*width: 3em;*/
-  height: 5%;
   text-align: center;
+  width: 40%;
+  height: 5%;
+  opacity: 0;
+  background-color: rgba(173, 216, 230, 0.4);
+  border: .2em solid;
+  border-color: rgba(18, 200, 255, 0);
+  border-radius: 0.1em;
   margin-left: 4%;
+  margin-bottom: 1%;
+  box-shadow: 0 0 0.3em rgba(18, 200, 255, 0);
+  animation: viewfade 1s linear 0.3s forwards, viewintro 2.5s linear 0.3s none, viewtitlehover 1s linear infinite;
+  animation-play-state: running, running, paused;
+  transition: all 0.2s linear 0s;
+  &:hover {
+    border: .2em solid rgba(18, 200, 255, 0.3);
+    animation-play-state: running, running, running;
+  }
+}
+
+@keyframes viewtitlehover {
+  0% {
+    box-shadow: 0 0 0.3em rgba(18, 200, 255, 1);
+  }
+  50% {
+    box-shadow: 0 0 0.6em rgba(18, 200, 255, 1);
+  }
+  100% {
+    box-shadow: 0 0 0.3em rgba(18, 200, 255, 1);
+  }
+}
+
+@keyframes viewfade {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes viewintro {
+  50% {
+    border-color: rgba(18, 200, 255, 1);
+    box-shadow: 0 0 1em rgba(18, 200, 255, 1);
+  }
+  100% {
+    border-color: rgba(18, 200, 255, 0);
+    box-shadow: 0 0 1em rgba(18, 200, 255, 1);
+  }
 }
 
 .viewControl {
+  width: 90%;
+  opacity: 0;
+  margin-top: 1%;
+  margin-bottom: 1%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  transition: all 0.5s linear 0s;
+  animation: viewfade 1s linear 0.6s forwards;
 }
 
 .viewInfo {
-  border: .1em solid lightblue;
-  border-radius: .1em;
-  width: 3em;
+  width: 20%;
+  height: 2em;
+  overflow: hidden;
+  background-color: rgba(173, 216, 230, 0.4);
+  border: 0.1em solid;
+  border-color: rgba(18, 200, 255, 0);
+  border-radius: 0.1em;
   margin-left: 4%;
   padding-left: 4%;
+  animation: viewinfointro 2.5s linear 0.6s none, viewinfointroshadow 2.5s linear 0.6s forwards;
+  transition: border-color 0.2s linear 0s, 
+              width 0.5s linear 0s, 
+              height 0.5s linear 0s,
+              background-color 0.5s linear 0s,
+              margin 0.5s linear 0s,
+              position 0.5s linear 0s,
+              z-index 0.5s linear 0s;
+  &:hover {
+    border-color: rgba(18, 200, 255, 1);
+  }
+  &:active {
+    width: 35%;
+    height: auto;
+    background-color: rgba(173, 216, 230, 1);
+    margin-right: -10em;
+    margin-top: 3em;
+    position: absolute;
+    z-index: 2;
+  }
+}
+
+@keyframes viewinfointro {
+  50% {
+    border-color: rgba(18, 200, 255, 1);
+  }
+  100% {
+    border-color: rgba(18, 200, 255, 0);
+  }
+}
+
+@keyframes viewinfointroshadow {
+  50% {
+    box-shadow: 0 0 1em rgba(18, 200, 255, 1);
+  }
+  100% {
+    box-shadow: 0 0 1em rgba(18, 200, 255, 1);
+  }
+}
+
+.viewPoster {
+  text-align: center;
+  width: 16%;
+  height: 92%;
+  font-size: 1.17em;
+  font-weight: bold;
+  color: black;
+  background: #b92b27;
+  background: -webkit-linear-gradient(to right, #1565C0, #b92b27);
+  background: linear-gradient(to right, #1565C0, #b92b27);
+  border-radius: 0.6em;
+  padding-left: 2%;
+  padding-right: 2%;
+  text-shadow: 0 0 0.1em white;
+  display: flex;
+  flex-direction: column;
+}
+
+.postedBy {
+}
+
+.posterLink {
+  text-decoration: none;
+  height: 50%;
+  color: black;
+  background-color: rgba(81, 60, 186, 0.8);
+  border-radius: 0.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.1s linear;
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 1.8rem;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 0.6em;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+  }
+  &:hover{
+    background-color: rgba(156, 29, 219, 0.8);
+    &:after {
+      width: 6rem;
+      background-color: rgba(255,255,255,0);
+      -webkit-transition: all 0.3s ease-out;
+      -moz-transition: all 0.3s ease-out;
+      -ms-transition: all 0.3s ease-out;
+      -o-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+    }
+  }
+}
+
+.viewPosterImage {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin-left: 3%;
+}
+
+.addArtistButton {
+  width: 15%;
+  height: 70%;
+  background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
+  background: linear-gradient(to right, #38ef7d, #11998e);
+  border-color: rgba(173, 216, 230, 0.4);
+  border-radius: 0.2em;
+  transition: all 0.2s linear 0s;
+  &:hover {
+    border-color: rgba(28, 255, 77, 1);
+    box-shadow: 0 0 1em rgba(28, 255, 77, 1);
+  }
+}
+
+.addFavButton {
+  height: 70%;
+  background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
+  background: linear-gradient(to right, #38ef7d, #11998e);
+  border-color: rgba(173, 216, 230, 0.4);
+  border-radius: 0.2em;
+  transition: all 0.2s linear 0s;
+  &:hover {
+    border-color: rgba(28, 255, 77, 1);
+    box-shadow: 0 0 1em rgba(28, 255, 77, 1);
+  }
 }
 
 .viewPlayer {
   width: 96%;
   height: 64%;
+  opacity: 0;
   align-self: center;
+  z-index: 0;
+  animation: viewfade 1s linear 0.9s forwards;
+}
+
+.postForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+}
+
+.postFormOptions {
+  display: flex;
+  justify-content: space-around;
+  width: 75%;
+  opacity: 0;
+  animation: 1s postformload 0.5s linear forwards
+}
+
+.postFormInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.postFormTypes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10%;
+}
+
+.postForm label {
+  font-size: 250%;
+  margin-bottom: 5%;
+}
+
+.postFormDropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  height: 20%;
+  width: 60%;
+  opacity: 0;
+  animation: 1s postformload 0.5s linear forwards
+}
+
+.dropzoneText {
+  // margin-top: 15%;
+  // margin-left: 15%;
+}
+
+.postFormButton{
+  opacity: 0;
+  animation: 1s postformload 0.5s linear forwards
+}
+
+@keyframes postformload {
+  100% {
+    opacity: 1;
+  }
 }

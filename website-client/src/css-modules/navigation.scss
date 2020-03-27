@@ -82,6 +82,21 @@
   margin: 5% auto;
 }
 
+#code {
+  background-color: grey;
+  width: 5%;
+}
+
+#code:focus {
+  animation: 1.3s revealtypeinput 1s forwards;
+}
+
+@keyframes revealtypeinput {
+	100% {
+	  width: 95%;
+  }
+}
+
 .authbtnDiv {
   display: flex;
   justify-content: space-around;
@@ -129,13 +144,35 @@
   
 }
 
+.profileButton {
+  border: 0.05em solid black;
+  border-radius: 5px;
+  padding: 0.05em;
+  color: black;
+  background-color: lightblue;
+  text-decoration: none;
+}
+
+.profileButton:hover {
+  background-color: #879cbc;
+}
+
 .recpostButton, .mypostButton, .myfavButton, .artistsButton, .cpostButton {
   opacity: 0;
+}
+
+.recpostButton, .mypostButton, .myfavButton, .artistsButton, .cpostButton:visited {
+  color: black;
+}
+
+.recpostButton:hover, .mypostButton:hover, .myfavButton:hover, .artistsButton:hover, .cpostButton:hover {
+  background-color: lightblue;
 }
 
 .recpostButton {
   text-decoration: none;
   text-align: center;
+  background:#879cbc;
   border: 0.2em solid black;
   border-radius: 5px;
   width: 12vw;
@@ -145,6 +182,7 @@
 .mypostButton {
   text-decoration: none;
   text-align: center;
+  background:#879cbc;
   border: 0.2em solid black;
   border-radius: 5px;
   width: 12vw;
@@ -154,6 +192,7 @@
 .myfavButton {
   text-decoration: none;
   text-align: center;
+  background:#879cbc;
   border: 0.2em solid black;
   border-radius: 5px;
   width: 12vw;
@@ -163,6 +202,7 @@
 .artistsButton {
   text-decoration: none;
   text-align: center;
+  background:#879cbc;
   border: 0.2em solid black;
   border-radius: 5px;
   width: 12vw;
@@ -172,6 +212,7 @@
 .cpostButton {
   text-decoration: none;
   text-align: center;
+  background:#879cbc;
   border: 0.2em solid black;
   border-radius: 5px;
   width: 12vw;

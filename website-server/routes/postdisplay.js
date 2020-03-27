@@ -5,14 +5,17 @@ const {
   showPost,
   getPosts,
   getMyPosts,
-  getMyFavorites
+  getMyFavorites,
+  countPosts
 } = require("../handlers/posts");
 
-router.route("/:id/favorites").get(getMyFavorites);
+router.route("/:id/favorites/page/:pageNumber").get(getMyFavorites);
 
-router.route("/:id").get(getMyPosts);
+router.route("/:id/page/:pageNumber").get(getMyPosts);
 
-router.route("/page/num/:pageNumber").get(getPosts);
+router.route("/page/:pageNumber").get(getPosts);
+
+router.route("/count").get(countPosts);
 
 router
   .route("/show/:post_id")

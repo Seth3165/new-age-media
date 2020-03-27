@@ -1,78 +1,26 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 // import Uploader from "../components/Uploader";
-import {createNewPost} from "../store/actions/posts";
+import {createNewNews} from "../store/actions/news";
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import ReactS3 from 'react-s3';
 import { uploadFile } from 'react-s3';
 import {AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} from "../keys";
-// import Mp4Convert from 'mp4-convert';
-// import ffmpeg from 'ffmpeg';
 
-
-class PostForm extends Component {
+class NewsForm extends Component {
   constructor(props){
     super(props);
     this.state = {
       title: "",
       description: "",
-      gallerytype: "",
+      newstype: "",
       files: []
       // acceptedFiles: []
     };
-    
-    // this.onFormSubmit = this.onFormSubmit.bind(this);
-    // this.onChange = this.onChange.bind(this);
-    // this.fileUpload = this.fileUpload.bind(this);
-    // this.handleOnDrop = this.handleOnDrop.bind(this);
   }
   
-  // onFormSubmit(e){
-  //   e.preventDefault();
-  //   this.props.getSigPut(this.state.file);
-    // .then((response)=>{
-    //   console.log(response.data);
-    // });
-  // }
-  
-  // onChange(e) {
-  //   this.setState({file:e.target.files[0]});
-  // }
-  
-  // fileUpload(file){
-    // return axios.get('/upload', {
-    //   params: {
-    //     filename: file.name,
-    //     filetype: file.type
-    //   }
-    // }).then(res => {
-    //   const options = {
-    //     headers: {
-    //       'Content-Type': file.type
-    //     }
-    //   };
-    //   let url = res.data.url;
-    //   let formData = new FormData(file);
-      
-    //   return axios.put(url, formData, options);
-    // });
-    
-    // const url = 'http://example.com/file-upload';
-    // let formData = new FormData(file);
-    // const config = {
-    //     headers: {
-    //         'content-type': 'multipart/form-data'
-    //     }
-    // }
-    // console.log(formData);
-    
-    // return  post(url, formData, config)
-  // }
-  
-  
-  
-  handleNewPost = event => {
+  handleNewNews = event => {
     event.preventDefault();
     // let files = this.state.acceptedFiles.slice();
     // console.log(files)
@@ -82,7 +30,7 @@ class PostForm extends Component {
     // this.setState({files});
     // console.log(this.state.files[0].name);
     let config = {
-      bucketName: 'namtestbucket',
+      bucketName: 'namnewstestbucket',
       // albumName: 'videos',
       region: 'us-east-1',
       accessKeyId: AWS_ACCESS_KEY_ID,
@@ -107,10 +55,10 @@ class PostForm extends Component {
     // }
     
     this.props
-      .createNewPost(
+      .createNewNews(
         this.state.title,
         this.state.description,
-        this.state.gallerytype,
+        this.state.newstype,
         this.state.files[0].name);
     ReactS3.uploadFile(this.state.files[0] , config)
     .then( (data) => {
@@ -122,7 +70,7 @@ class PostForm extends Component {
     });
     this.setState({title: ""});
     this.setState({description: ""});
-    this.setState({gallerytype: ""});
+    this.setState({newstype: ""});
     this.setState({files: []});
     this.props.history.push("/");
   }
@@ -131,85 +79,9 @@ class PostForm extends Component {
     this.setState({files});
   }
   
-  // _onDrop = (files) => {
-    // upload.post(`/uploads`)
-    //   .attach('video', files[0])
-    //   .end((err, res) => {
-    //     if (err) console.log(err);
-    //     alert('File uploaded!');
-    //   });
-    // let file = files[0];
-    // axios.get(`/sign-s3?file-name=${file.name}&file-type=${file.type}`)
-    // .then(function (result) {
-    //   var signedUrl = result.data.signedUrl;
-      
-    //   var options = {
-    //     headers: {
-    //       'Content-Type': file.type
-    //     }
-    //   };
-
-    //   return axios.put(result.signedRequest, file, options);
-    // })
-    // .then(function (result) {
-    //   console.log(result);
-    // })
-    // .catch(function (err) {
-    //   console.log(err);
-    // });
-  //   .then(function (result) {
-  //     console.log(result);
-  //   })
-  //   .catch(function (err) {
-  //     console.log(err);
-  //   });
-  // }
-  
-  // handleOnDrop(files) {
-  //   this.setState({isUploading: true});
-    
-  //   Promise.all(files.map(file => this.uploadVideo(file)))
-  //     .then(videos => {
-  //       console.log(videos);
-  //       this.setState({
-  //         isUploading: false,
-  //         videos: this.state.videos.concat(videos)
-  //       });
-  //     }).catch(e => console.log(e));
-  // }
-  
-  // handleFinishedUpload = info => {
-  //   console.log(info);
-  //   console.log('File uploaded with filename', info.filename);
-  //   console.log('Access it on s3 at', info.fileUrl);
-  // }
-  
-  // uploadVideo(file) {
-  //   return axios.get('/upload', {
-  //     params: {
-  //       filename: file.name,
-  //       filetype: file.type
-  //     }
-  //   }).then(res => {
-  //     const options = {
-  //       headers: {
-  //         'Content-Type': file.type
-  //       }
-  //     };
-  //     return axios.put(res.data.url, file, options);
-  //   }).then(res => {
-  //     const {name} = res.config.data;
-  //     return {
-  //       name,
-  //       isUploading: true,
-  //       url: `https://namtestbucket.s3.amazonaws.com/${file.name}`
-  //     };
-  //   });
-  // }
-  
-  render(){
+   render(){
     return(
-      <form className="postForm" encType="multipart/form-data" onSubmit={this.handleNewPost}>
+      <form className="postForm" encType="multipart/form-data" onSubmit={this.handleNewNews}>
         {this.props.errors.message && (
           <div className="errorMessage">{this.props.errors.message}</div>
         )}
@@ -232,17 +104,17 @@ class PostForm extends Component {
           </div>
           <div className="postFormTypes">
             <div>
-              <input type="radio" name="galleryType" value="videoGallery" onChange={e => this.setState({gallerytype: e.target.value})}/> Video Gallery<br/>
+              <input type="radio" name="newsType" value="videoGallery" onChange={e => this.setState({newstype: e.target.value})}/> Video Gallery<br/>
             </div>
             <div>
-              <input type="radio" name="galleryType" value="imageGallery" onChange={e => this.setState({gallerytype: e.target.value})}/> Image Gallery<br/>
+              <input type="radio" name="newsType" value="imageGallery" onChange={e => this.setState({newstype: e.target.value})}/> Image Gallery<br/>
             </div>
             <div>
-              <input type="radio" name="galleryType" value="musicGallery" onChange={e => this.setState({gallerytype: e.target.value})}/> Music Gallery<br/>
+              <input type="radio" name="newsType" value="musicGallery" onChange={e => this.setState({newstype: e.target.value})}/> Music Gallery<br/>
             </div>
           </div>
         </div>
-        {this.state.gallerytype === "videoGallery" && (
+        {this.state.newstype === "videoGallery" && (
           <Dropzone maxfiles="1" accept="video/*" className="postFormDropzone" onDrop={ this._onDrop.bind(this) } size={ 150 }>
             {({isDragActive}) => (
                 <div className="dropzoneText">
@@ -251,7 +123,7 @@ class PostForm extends Component {
             )}
           </Dropzone>
         )}
-        {this.state.gallerytype === "imageGallery" && (
+        {this.state.newstype === "imageGallery" && (
           <Dropzone maxfiles="10" multiple="true" accept="image/*" className="postFormDropzone" onDrop={ this._onDrop.bind(this) } size={ 150 }>
               {({isDragActive}) => (
                   <div className="dropzoneText">
@@ -260,7 +132,7 @@ class PostForm extends Component {
               )}
           </Dropzone>
         )}
-        {this.state.gallerytype === "musicGallery" && (
+        {this.state.newstype === "musicGallery" && (
           <Dropzone maxfiles="1" accept="audio/*" className="postFormDropzone" onDrop={ this._onDrop.bind(this) } size={ 150 }>
               {({isDragActive}) => (
                   <div className="dropzoneText">
@@ -276,7 +148,7 @@ class PostForm extends Component {
         </ul>
         {this.state.files.length > 0 && (
           <button type="submit" className="postFormButton">
-          Create a post!
+          Add News!
           </button>
         )}
       </form>
@@ -290,4 +162,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {createNewPost})(PostForm);
+export default connect(mapStateToProps, {createNewNews})(NewsForm);

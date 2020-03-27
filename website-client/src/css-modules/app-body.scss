@@ -33,10 +33,24 @@ body {
   background: #364EEB;
 }
 
+// color: linear-gradient(to right, #ff0000 0%, #ff9966 100%);
+
 .mainTitle {
+  background: linear-gradient(to right, #ff0000 0%, #ff9966 100%);
+  -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  text: center;
   opacity: 0;
   animation: 1s maintitleload 0.5s forwards;
 }
+
+// -webkit-text-stroke: 0.1em black;
+
+// text-shadow:
+// 		-1px -1px 0 #000,
+// 		1px -1px 0 #000,
+// 		-1px 1px 0 #000,
+// 		1px 1px 0 #000;
 
 @keyframes maintitleload {
   100% {

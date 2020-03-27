@@ -17,10 +17,14 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   profileImageUrl: {
-    type:String
+    type: String
   },
   bio: {
-    type:String
+    type: String
+  },
+  isAdmin: {
+    type: Boolean, 
+    default: false
   },
   messages: [{
     type: mongoose.Schema.Types.ObjectId,
