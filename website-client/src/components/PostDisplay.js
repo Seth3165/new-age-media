@@ -23,11 +23,11 @@ class PostDisplay extends Component {
       <PostView
         key={p._id}
         id={p._id}
-        date={p.createAt} 
+        date={p.createAt}
         title={p.title}
         description={p.description}
         gallerytype={p.gallerytype}
-        file={p.file}
+        files={p.files}
         username={p.user.username}
         authorID={p.user._id}
         profileImageUrl={p.user.profileImageUrl}

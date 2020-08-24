@@ -9,12 +9,13 @@ const errorHandler = require("./handlers/error");
 const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
 const newsRoutes = require("./routes/news");
-const newsDisplayRoutes = require("./routes/newsdisplay")
+const newsDisplayRoutes = require("./routes/newsdisplay");
 const postRoutes = require("./routes/posts");
 const postDisplayRoutes = require("./routes/postdisplay");
 const messageRoutes = require("./routes/messages");
 const uploadsRoutes = require("./routes/uploads");
 const videoRoutes = require("./routes/videos");
+const imageRoutes = require("./routes/images");
 const {loginRequired, ensureCorrectUser} = require("./middleware/auth");
 const db = require("./models");
 const PORT = 8081;
@@ -73,6 +74,8 @@ app.use("/api/news", newsDisplayRoutes);
 app.use("/api/posts", loginRequired, postDisplayRoutes);
 
 app.use("/video", videoRoutes);
+
+app.use("/images", imageRoutes);
 
 app.get("/api/messages", loginRequired, async function(req, res, next) {
   try {

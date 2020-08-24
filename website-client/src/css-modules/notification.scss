@@ -1,6 +1,6 @@
 .scrollContainer {
   width: 15vw;
-  height: 600px;
+  height: 37.5em;
   border-color: #2C42D1;
   border-width: 15px;
 }
@@ -9,14 +9,66 @@
   text-align: center;
 }
 
+.newsNav {
+  height: 98%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.newsNav h1 {
+  opacity: 0;
+  animation: newsnavfade 1s linear 0.3s forwards;
+}
+
+.newsList {
+  height: 100%;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  animation: newsnavfade 1s linear 0.6s forwards;
+}
+
 .newsItem {
+  text-decoration: none;
   text-align:center;
+  font: 500px;
   width: 90%;
   height: 10%;
-  background-color: green;
+  background: -webkit-linear-gradient(to right, #1be06d, #168745);
+  background: linear-gradient(to right, #1be06d, #168745);
   border: 0.1em solid black;
   border-radius: 5%;
   margin-left: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.createNewsButton {
+  text-decoration: none;
+  text: center;
+  height: 4%;
+  width: 45%;
+  opacity: 0;
+  color: black;
+  background: lightblue;
+  border: 1px solid black;
+  border-radius: 0.3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: newsnavfade 1s linear 2s forwards;
+}
+
+@keyframes newsnavfade {
+  100% {
+    opacity: 1;
+  }
 }
 
 .messageNav {
@@ -83,7 +135,7 @@
   overflow: hidden;
   background-color: rgba(29, 210, 219, 0.6);
   border: 0.1em solid black;
-  border-radius: 10%;
+  border-radius: 0.4em;
   display: flex;
   justify-content: space-around;
   align-items: center;

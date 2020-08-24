@@ -4,16 +4,14 @@ import DefaultProfileImg from "../images/default-profile-image.jpg";
 
 const ArtistItem = ({id,  profileImageUrl, username, currentUser}) => (
   <Link to={`/users/${currentUser}/profile/${id}`} className="artistItem">
-    <div>
-      <img 
-        src={profileImageUrl || DefaultProfileImg} 
-        alt={username} 
-        height="100" 
-        width="100" 
-        className="artist-image"
-      />
-      <div>{username}</div>
-    </div>
+    <img 
+      src={profileImageUrl || DefaultProfileImg} 
+      alt={username} 
+      height="50" 
+      width="50" 
+      className="artistImage"
+    />
+    <div className="artistImageName">{username}</div>
   </Link>
 );
 

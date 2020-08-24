@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Moment from "react-moment";
-import { Link } from "react-router-dom";
+import { Link, __RouterContext } from "react-router-dom";
+import { useTransition, animated } from "react-spring";
 import { Fade } from 'react-animation-components'
 import DefaultProfileImg from "../images/default-profile-image.jpg";
 
@@ -12,8 +13,8 @@ import DefaultProfileImg from "../images/default-profile-image.jpg";
 //   className="timeline-image"
 // />
 
+
 const PostItem = ({id, date, profileImageUrl, title, description, file, username, currentUser, isCorrectUser}) => (
-  // <Fade in>
   <Link to={`/users/${currentUser}/posts/${id}`} className="postItem">
     <h1>{title}</h1>
     <div>
@@ -24,8 +25,14 @@ const PostItem = ({id, date, profileImageUrl, title, description, file, username
       <div>By: {username}</div>
     </div>
   </Link>
-  // </Fade>
 );
+
+
+    // <animated.div key={key} style={props}>
+// transition.map(({ item, key, props }) =>
+//     item &&
+
+    // 
 
 // {isCorrectUser && (
 //   <a className="btn btn-danger" onClick={removePost}>

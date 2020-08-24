@@ -106,20 +106,66 @@ class PostForm extends Component {
     // 	console.log(e.msg);
     // }
     
+    // {this.state.gallerytype === "imageGallery" && (
+    //   this.props
+    //   .createNewPost(
+    //     this.state.title,
+    //     this.state.description,
+    //     this.state.gallerytype,
+    //     this.state.files[0].name),
+    //   ReactS3.uploadFile(this.state.files[0] , config)
+    //   .then( (data) => {
+    //     console.log(data);
+    //     console.log(data.location);
+    //   })
+    //   .catch( (err) => {
+    //     alert(err);
+    //   }),
+    //   this.setState({title: ""}),
+    //   this.setState({description: ""}),
+    //   this.setState({gallerytype: ""}),
+    //   this.setState({files: []}),
+    //   this.props.history.push("/")
+    // )}
+    // for (i = 0, i < this.state.files.length, i++) {
+      
+    // }
+    let filenames = this.state.files.map(file => {
+      return file.name;
+    });
+    
+    console.log(filenames);
+    
+    // this.state.files[0].name
+    
     this.props
       .createNewPost(
         this.state.title,
         this.state.description,
         this.state.gallerytype,
-        this.state.files[0].name);
-    ReactS3.uploadFile(this.state.files[0] , config)
-    .then( (data) => {
-      console.log(data);
-      console.log(data.location);
-    })
-    .catch( (err) => {
-      alert(err);
+        filenames
+      );
+    
+    this.state.files.map(file => {
+      ReactS3.uploadFile(file , config)
+      .then( (data) => {
+        console.log(data);
+        console.log(data.location);
+      })
+      .catch( (err) => {
+        alert(err);
+      });
     });
+    
+    // ReactS3.uploadFile(this.state.files[0] , config)
+    // .then( (data) => {
+    //   console.log(data);
+    //   console.log(data.location);
+    // })
+    // .catch( (err) => {
+    //   alert(err);
+    // });
+    
     this.setState({title: ""});
     this.setState({description: ""});
     this.setState({gallerytype: ""});
@@ -252,7 +298,7 @@ class PostForm extends Component {
           </Dropzone>
         )}
         {this.state.gallerytype === "imageGallery" && (
-          <Dropzone maxfiles="10" multiple="true" accept="image/*" className="postFormDropzone" onDrop={ this._onDrop.bind(this) } size={ 150 }>
+          <Dropzone maxfiles="10" multiple={true} accept="image/*" className="postFormDropzone" onDrop={ this._onDrop.bind(this) } size={ 150 }>
               {({isDragActive}) => (
                   <div className="dropzoneText">
                     {isDragActive ? "Drop!" : 'Click me or drag a file to upload!'}

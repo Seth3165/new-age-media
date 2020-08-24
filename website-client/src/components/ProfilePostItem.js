@@ -15,9 +15,8 @@ import DefaultProfileImg from "../images/default-profile-image.jpg";
 const ProfilePostItem = ({id, date, profileImageUrl, title, description, file, username, currentUser, isCorrectUser}) => (
   // <Fade in>
   <Link to={`/users/${currentUser}/posts/${id}`} className="profilePostItem">
-    <h1>{title}</h1>
+    <div>{title}</div>
     <div>
-      Created: 
       <Moment format="Do MMM YYYY">
         {date}
       </Moment>

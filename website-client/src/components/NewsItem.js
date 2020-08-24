@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 
 const NewsItem = ({id, date, profileImageUrl, title, description, file, username, currentUser, isCorrectUser}) => (
   // <Fade in>
-  <Link to={`/users/${currentUser}/posts/${id}`} >
-    <div className="newsItem">{title}</div>
-    
+  <Link to={`/users/${currentUser}/posts/${id}`} className="newsItem" >
+    {title}
   </Link>
   // </Fade>
 );

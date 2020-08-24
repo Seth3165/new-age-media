@@ -1,8 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import DefaultProfileImg from "../images/default-profile-image.jpg";
+import ImageGallery from "../containers/ImageGallery";
 
-const PostView = ({id, date, profileImageUrl, title, description, file, username, authorID, currentUser, addFavorite, addArtist, removePost, isCorrectUser}) => (
+const PostView = ({id, date, profileImageUrl, title, description, gallerytype, files, username, authorID, currentUser, addFavorite, addArtist, removePost, isCorrectUser}) => (
   <div className="viewArea">
     <h2 className="viewTitle">{title}</h2>
     <div className="viewControl">
@@ -21,19 +22,30 @@ const PostView = ({id, date, profileImageUrl, title, description, file, username
       <button className="addArtistButton" onClick={addArtist}>Add Artist</button>
       <button className="addFavButton" onClick={addFavorite}>Add to Favorites</button>
     </div>
-    <video controls
-      className="viewPlayer"
-      src= {`/video/${username}/${file.split(' ').join('%20')}`}
-      width="300"
-      height="200"
-      preload={"none"}
-      >
-    </video>
-    {isCorrectUser && (
-      <a className="" onClick={removePost}>
-        Delete
-      </a>
+    {gallerytype==="videoGallery" && (
+      <video 
+        controls
+        className="viewPlayer"
+        src= {`/video/${username}/${files[0].split(' ').join('%20')}`}
+        preload={"none"}
+        >
+      </video>
     )}
+    {gallerytype==="imageGallery" && (
+        <ImageGallery 
+          files={files}
+          username={username}
+        />
+    )}
+    <div className="viewPaths">
+      {isCorrectUser && (
+        <a className="deletePostButton" onClick={removePost}>
+          Remove Post
+        </a>
+      )}
+      <p>placeholder</p>
+      <p>placeholder</p>
+    </div>
   </div>
 );
 

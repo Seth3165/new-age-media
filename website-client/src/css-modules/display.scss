@@ -1,16 +1,24 @@
 .displayContainer {
   width: 50vw;
-  height: 600px;
+  height: 37.5em;
   border-color: #2C42D1;
   border-width: 15px;
   display: flex;
   justify-content: center;
 }
 
-.displayContainer h1 {
-  opacity: 0;
-  color: darkgreen;
-  animation: 1s displayheaderload 0.5s linear forwards
+// .displayContainer h1 {
+//   opacity: 0;
+//   animation: 1s displayheaderload 0.5s linear forwards
+// }
+
+.animatedDisplay {
+  width: 50vw;
+  height: 37.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes displayheaderload {
@@ -19,24 +27,231 @@
   }
 }
 
-.profileDisplay h1{
+.profileDisplay {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.profileTitle {
   text-align: center;
+  height: 5%;
+  opacity: 0;
+  color: #571d1d;
+  text-shadow: 0 0 0em rgba(0, 128, 0, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation:  profileload 1s linear 0.3s forwards, profiletitleintro 4s linear 0.3s forwards;
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 1.4em;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.6em;
+    z-index: -1;
+    animation: profiletitlebackground 1s ease-in 3.5s forwards;
+  }
+}
+
+@keyframes profiletitleintro {
+  12.5% {
+    opacity: 1;
+    -webkit-text-stroke: 0.03em rgba(219, 42, 42, 1);
+  }
+  25% {
+    text-shadow: 0 0 0.3em rgba(0, 128, 0, 1);
+  }
+  50% {
+    opacity: 1;
+    -webkit-text-stroke: 0.03em rgba(219, 42, 42, 0);
+    text-shadow: 0 0 0em rgba(0, 128, 0, 1);
+  }
+  75% {
+    color: #c21d1d;
+    text-shadow: 0 0 0.3em rgba(150, 35, 35, 1);
+  }
+  100% {
+    color: #c21d1d;
+    -webkit-text-stroke: 0.04em rgba(87, 29, 29, 1);
+    text-shadow: 0 0 0.3em rgba(150, 35, 35, 1);
+  }
+}
+
+@keyframes profiletitlebackground {
+  100% {
+    width: 20%;
+  }
 }
 
 .artistInfo {
+  width: 90%;
+  height: 25%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.artistInfoPortrait {
+  width: 20%;
+  height: 100%;
+  opacity: 0;
+  margin-bottom: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  animation: 1s profileload 0.5s linear forwards
+}
+
+.artistInfoPortrait h2 {
+  height: 30%;
+  font-size: 2.5em;
+  margin: 0;
+}
+
+.artistProfileImage {
+  width: 5.5em;
+  height: 5.5em;
+  border: 1px solid black;
+  border-radius: 0.3em;
+}
+
+.profileDescription {
+  width: 0%;
+  height: 0%;
+  opacity: 0;
+  background: rgba(130, 238, 250, 0.4);
+  border: 0.3em groove #571d1d;
+  border-radius: 0.7em;
+  padding-top: 2%;
+  padding-left: 5%;
+  margin-right: 10%;
+  overflow: hidden;
+  animation:  profileload 1s linear 0.7s forwards, 
+              profiledescriptionexpand 1s linear 1s forwards,
+              profiledescriptionglow 1s ease-out 3s forwards;
+}
+
+@keyframes profiledescriptionexpand {
+  50% {
+    width: 20%;
+    height: 0%;
+  }
+  100% {
+    width: 40%;
+    height: 80%;
+  }
+}
+
+@keyframes profiledescriptionglow {
+  100% {
+    border-color: #c45151;
+    box-shadow: 0 0 1em #c45151;
+  }
+}
+
+.editProfileButton {
+  text-decoration: none;
+  text-align: center;
+  width: 10%;
+  height: 30%;
+  opacity: 0;
+  background: #c5f0c7;
+  border: 1px solid black;
+  border-radius: 0.3em;
+  animation: profileload 1s linear 0.9s forwards;
+}
+
+@keyframes profileload {
+  100% {
+    opacity: 1;
+  }
+}
+
+.profilePostList{
+  width: 90%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.profilePostList{
+  @for $i from 1 through 10 {
+    a:nth-of-type(#{$i}) {
+      animation-delay: (.4s * $i) + .5;
+    }
+  }
+}
+
+.profilePostItem{
+  text-decoration: none;
+  width: 40%;
+  height: 17%;
+  opacity: 0;
+  color: black;
+  background: #11998e;
+  background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
+  background: linear-gradient(to right, #38ef7d, #11998e);
+  border: .2em;
+  /*border-image: linear-gradient(to right, #ffe259, #ffa751);*/
+  border-color: #ffa751;
+  /*border-left-color: #ffe259;*/
+  border-style: outset;
+  border-radius: 5px;
+  // padding: .2em;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  animation: profilepostitemload 1s linear forwards;
+}
+
+@keyframes profilepostitemload {
+  100% {
+    opacity: 1;
+  }
+}
+
+.recentPosts {
+  height: 100%;
+  width: 42.54871vw;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
-.artistInfoPotrait {
-  margin-left: 2vw;
-}
-
-.recentPosts h1 {
+.postListTitle {
   text-align: center;
+  opacity: 0;
+  color: #281d57;
+  -webkit-text-stroke: 0.03em rgba(30, 150, 46, 0);
+  text-shadow: 0 0 0em rgba(0, 128, 0, 1);
   /*display: flex;*/
   /*flex-direction: column;*/
   /*justify-content: space-around;*/
+  animation: postlisttitleintro 2s linear forwards;
+}
+
+@keyframes postlisttitleintro {
+  25% {
+    opacity: 1;
+    -webkit-text-stroke: 0.03em rgba(30, 150, 46, 1);
+  }
+  50% {
+    text-shadow: 0 0 0.3em rgba(0, 128, 0, 1);
+  }
+  100% {
+    opacity: 1;
+    -webkit-text-stroke: 0.03em rgba(30, 150, 46, 0);
+    text-shadow: 0 0 0em rgba(0, 128, 0, 1);
+  }
 }
 
 .postList {
@@ -48,11 +263,11 @@
   // animation: postlistload 6s linear forwards;
 }
 
-@keyframes postlistload {
-  100% {
-    opacity: 1;
-  }
-}
+// @keyframes postlistload {
+//   100% {
+//     opacity: 1;
+//   }
+// }
 
 .pageNav{
   
@@ -108,7 +323,7 @@
   border: solid black 0.2em;
   padding: 1em;
   width: 40vw;
-  height: 3em;
+  height: 2.5em;
   border-radius: 10px;
   transition-property: width, height;
   transition: 0.2s linear;
@@ -165,39 +380,62 @@
   }
 }
 
-.profilePostList{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 50%;
-}
-
-.profilePostItem{
-  display:flex;
-  justify-content: space-around;
-  align-items: center;
-  background: #11998e;
-  background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
-  background: linear-gradient(to right, #38ef7d, #11998e);
-
-  border: .2em;
-  /*border-image: linear-gradient(to right, #ffe259, #ffa751);*/
-  border-color: #ffa751;
-  /*border-left-color: #ffe259;*/
-  border-style: outset;
-  border-radius: 5px;
-  height: 20%;
-  width: 80%;
-  // padding: .2em;
-}
-
 .myPosts {
   
 }
 
 .myPosts h1 {
   text-align: center;
+}
+
+.myArtists {
+  height: 100%;
+  width: 42.54871vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.artistListTitle{
+  text-align: center;
+  opacity: 0;
+  animation: 1s artistfade linear forwards;
+}
+
+.artistList {
+  height: 80%;
+  display: flex;
+}
+
+.artistItem {
+  text-decoration: none;
+  width: 5em;
+  height: 6.5em;
+  opacity: 0;
+  color: black;
+  background-color: rgba(36, 209, 240, 0.7);
+  border: solid black 3px;
+  border-radius: 0.4em;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  animation: 1s artistfade 0.3s linear forwards;
+}
+
+.artistImage {
+  border-radius: 0.2em;
+}
+
+.artistImageName {
+  
+}
+
+@keyframes artistfade {
+  100% {
+    opacity: 1;
+  }
 }
 
 .displayControl {
@@ -222,7 +460,6 @@
   border: .2em solid;
   border-color: rgba(18, 200, 255, 0);
   border-radius: 0.1em;
-  margin-left: 4%;
   margin-bottom: 1%;
   box-shadow: 0 0 0.3em rgba(18, 200, 255, 0);
   animation: viewfade 1s linear 0.3s forwards, viewintro 2.5s linear 0.3s none, viewtitlehover 1s linear infinite;
@@ -246,12 +483,6 @@
   }
 }
 
-@keyframes viewfade {
-  100% {
-    opacity: 1;
-  }
-}
-
 @keyframes viewintro {
   50% {
     border-color: rgba(18, 200, 255, 1);
@@ -265,6 +496,7 @@
 
 .viewControl {
   width: 90%;
+  height: 11.2%;
   opacity: 0;
   margin-top: 1%;
   margin-bottom: 1%;
@@ -361,8 +593,8 @@
     content: "";
     position: absolute;
     width: 0%;
-    height: 1.8rem;
-    background-color: rgba(255,255,255,0.5);
+    height: 1.6rem;
+    background-color: rgba(255, 255, 255,0.5);
     border-radius: 0.6em;
     -webkit-transition: none;
     -moz-transition: none;
@@ -374,7 +606,7 @@
     background-color: rgba(156, 29, 219, 0.8);
     &:after {
       width: 6rem;
-      background-color: rgba(255,255,255,0);
+      background-color: rgba(255, 255, 255,0);
       -webkit-transition: all 0.3s ease-out;
       -moz-transition: all 0.3s ease-out;
       -ms-transition: all 0.3s ease-out;
@@ -427,6 +659,69 @@
   animation: viewfade 1s linear 0.9s forwards;
 }
 
+.galleryControl {
+  width: 96%;
+  height: 64%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+
+.viewImageFrame {
+  width: 100%;
+  height: 80%;
+  border: solid black 0.3em;
+  border-radius: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.viewImageFrame:first-child:nth-last-child(n + 2),
+.viewImageFrame:first-child:nth-last-child(n + 2) ~ *{
+  width: 30%;
+  height: 80%;
+}
+
+.viewImage {
+  width: 25em;
+  
+}
+
+.viewPaths {
+  text-align: center;
+  width: 96%;
+  height: 5%;
+  opacity: 0;
+  margin-top: 3%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  animation: viewfade 1s linear 1.2s forwards;
+}
+
+// animation: viewfade 1s linear 1.2s forwards
+
+@keyframes viewfade {
+  100% {
+    opacity: 1;
+  }
+}
+
+.deletePostButton {
+  width: 20%;
+  height: 100%;
+  opacity: 0.5;
+  background-color: rgba(200, 61, 255, 0.6);
+  border: 1px solid black;
+  border-radius: 0.6em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .postForm {
   display: flex;
   flex-direction: column;
@@ -440,7 +735,7 @@
   justify-content: space-around;
   width: 75%;
   opacity: 0;
-  animation: 1s postformload 0.5s linear forwards
+  animation: 1s postformload 0.5s linear forwards;
 }
 
 .postFormInfo {

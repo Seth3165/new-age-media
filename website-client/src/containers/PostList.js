@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {useTransition} from 'react-spring'
 import {connect} from "react-redux";
 import { fetchPosts, removePost, refreshPosts } from "../store/actions/posts";
 import {countTotalPosts} from "../store/actions/count";
@@ -51,6 +52,11 @@ class PostList extends Component {
     this.props.fetchPosts(pageNumber);
   }
   
+  // let transitions = useTransition(postList, item => item.key, {
+  //     from: { opacity: 1 },
+  //     leave: { opacity: 0 },
+  //   });
+  
   render() {
     const {posts, count, removePost, currentUser} = this.props;
     console.log(count);
@@ -69,13 +75,12 @@ class PostList extends Component {
         isCorrectUser={currentUser === p.user._id}
         />
       ));
+    
       // console.log(postList);
     return (
       <div className="recentPosts">
-        <h1>Recent Posts</h1>
-        <div className="postList">
-          {postList}
-        </div>
+        <h1 className="postListTitle">Recent Posts</h1>
+        <div className="postList">{postList}</div>
         <Pagination
           activePage={this.state.activePage}
           itemsCountPerPage={5}
@@ -87,6 +92,15 @@ class PostList extends Component {
     );
   }
 }
+
+// style={props}
+
+// <Transition
+//           postList={postList}
+//           from={{ opacity: 1, position: 'absolute' }}
+//           leave={{ opacity: 0, position: 'absolute' }}>
+//           {postList => props => }
+// </Transition>
 
 function mapStateToProps(state){
   return {

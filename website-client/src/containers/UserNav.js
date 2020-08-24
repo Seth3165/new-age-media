@@ -41,7 +41,7 @@ class UserNav extends Component {
         <Link to={`/users/${this.props.currentUser.user.id}/posts/favorites`} className="myfavButton">My Favorites</Link>
         <Link to={`/users/${this.props.currentUser.user.id}/artists`} className="artistsButton">Artists</Link>
         <Link to={`/users/${this.props.currentUser.user.id}/posts/new`} className="cpostButton">New Post</Link>
-        <a className="loButton" onClick={this.logout}>Log out</a>
+        <a className="logOutButton" onClick={this.logout}>Log out</a>
       </div>
     );
   }

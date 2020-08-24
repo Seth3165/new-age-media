@@ -27,7 +27,7 @@ class ArtistList extends Component {
     ));
     return (
       <div className="myArtists">
-        <h1>Artists</h1>
+        <h1 className="artistListTitle">Artists</h1>
         <div className="artistList">
           {artistList}
         </div>

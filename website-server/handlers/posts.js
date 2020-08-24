@@ -6,7 +6,7 @@ exports.createPost = async function (req, res, next) {
       title: req.body.title,
       description: req.body.description,
       gallerytype: req.body.gallerytype,
-      file: req.body.filename,
+      files: req.body.filenames,
       user: req.params.id
     });
     let foundUser = await db.User.findById(req.params.id);

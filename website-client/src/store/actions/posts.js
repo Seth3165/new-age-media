@@ -149,11 +149,11 @@ export const refreshPosts = () => {
   return dispatch => dispatch(reinstancePosts());
 };
 
-export const createNewPost = (title, description, gallerytype, filename) => (dispatch, getState) => {
+export const createNewPost = (title, description, gallerytype, filenames) => (dispatch, getState) => {
   let {currentUser} = getState();
   console.log(gallerytype)
   const id = currentUser.user.id;
-  return apiCall("post", `/api/users/${id}/posts`, {title, description, gallerytype, filename})
+  return apiCall("post", `/api/users/${id}/posts`, {title, description, gallerytype, filenames})
     .then(res => {})
     .catch(err => dispatch(addError(err.message)));
 };

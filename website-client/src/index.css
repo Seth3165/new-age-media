@@ -60,7 +60,7 @@ header {
 }
 .navContainer {
   width: 15vw;
-  height: 600px;
+  height: 37.5em;
   border-color: #2C42D1;
   border-width: 15px;
 }
@@ -69,7 +69,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 600px;
+  height: 37.5em;
 }
 
 .suBtn, .siBtn {
@@ -148,8 +148,8 @@ header {
 .controlNav {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 95%;
+  justify-content: space-between;
+  height: 98%;
   align-items: center;
 }
 
@@ -167,6 +167,7 @@ header {
   width: 9vh;
   border-radius: 35%;
   border: 0.2em solid black;
+  margin-top: 1.3em;
 }
 
 @keyframes portraitload {
@@ -175,20 +176,23 @@ header {
   }
 }
 .profileButton {
-  border: 0.05em solid black;
+  border: 0.05em ridge black;
   border-radius: 5px;
-  padding: 0.05em;
+  padding: 0.1em;
   color: black;
   background-color: lightblue;
   text-decoration: none;
+  transition: all 0.3s linear;
 }
 
 .profileButton:hover {
-  background-color: #879cbc;
+  border: 0.05em ridge darkgreen;
+  background-color: #ed5f5f;
 }
 
 .recpostButton, .mypostButton, .myfavButton, .artistsButton, .cpostButton {
   opacity: 0;
+  transition: all 0.3s linear;
 }
 
 .recpostButton, .mypostButton, .myfavButton, .artistsButton, .cpostButton:visited {
@@ -206,7 +210,7 @@ header {
   border: 0.2em solid black;
   border-radius: 5px;
   width: 12vw;
-  animation: 1s navigationbtnload 0.7s forwards;
+  animation: 1s navigationbuttonload 0.7s forwards;
 }
 
 .mypostButton {
@@ -216,7 +220,7 @@ header {
   border: 0.2em solid black;
   border-radius: 5px;
   width: 12vw;
-  animation: 1s navigationbtnload 0.9s forwards;
+  animation: 1s navigationbuttonload 0.9s forwards;
 }
 
 .myfavButton {
@@ -226,7 +230,7 @@ header {
   border: 0.2em solid black;
   border-radius: 5px;
   width: 12vw;
-  animation: 1s navigationbtnload 1.1s forwards;
+  animation: 1s navigationbuttonload 1.1s forwards;
 }
 
 .artistsButton {
@@ -236,7 +240,7 @@ header {
   border: 0.2em solid black;
   border-radius: 5px;
   width: 12vw;
-  animation: 1s navigationbtnload 1.3s forwards;
+  animation: 1s navigationbuttonload 1.3s forwards;
 }
 
 .cpostButton {
@@ -246,27 +250,47 @@ header {
   border: 0.2em solid black;
   border-radius: 5px;
   width: 12vw;
-  animation: 1s navigationbtnload 1.5s forwards;
+  animation: 1s navigationbuttonload 1.5s forwards;
 }
 
-@keyframes navigationbtnload {
+.logOutButton {
+  text-align: center;
+  text-decoration: none;
+  height: 5%;
+  width: 85%;
+  color: black;
+  background-color: rgba(173, 216, 230, 0.4);
+  border-radius: 0.3em;
+  padding-top: 5%;
+  opacity: 0;
+  animation: navigationbuttonload 1s linear 2s forwards;
+  transition: all 0.3s linear 0s;
+}
+.logOutButton:hover {
+  background-color: rgba(71, 179, 230, 0.5);
+}
+
+@keyframes navigationbuttonload {
   100% {
     opacity: 1;
   }
 }
 .displayContainer {
   width: 50vw;
-  height: 600px;
+  height: 37.5em;
   border-color: #2C42D1;
   border-width: 15px;
   display: flex;
   justify-content: center;
 }
 
-.displayContainer h1 {
-  opacity: 0;
-  color: darkgreen;
-  animation: 1s displayheaderload 0.5s linear forwards;
+.animatedDisplay {
+  width: 50vw;
+  height: 37.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes displayheaderload {
@@ -274,26 +298,246 @@ header {
     opacity: 1;
   }
 }
-.profileDisplay h1 {
-  text-align: center;
+.profileDisplay {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.artistInfo {
+.profileTitle {
+  text-align: center;
+  height: 5%;
+  opacity: 0;
+  color: #571d1d;
+  text-shadow: 0 0 0em green;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: profileload 1s linear 0.3s forwards, profiletitleintro 4s linear 0.3s forwards;
+}
+.profileTitle:after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 1.4em;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.6em;
+  z-index: -1;
+  animation: profiletitlebackground 1s ease-in 3.5s forwards;
+}
+
+@keyframes profiletitleintro {
+  12.5% {
+    opacity: 1;
+    -webkit-text-stroke: 0.03em #db2a2a;
+  }
+  25% {
+    text-shadow: 0 0 0.3em green;
+  }
+  50% {
+    opacity: 1;
+    -webkit-text-stroke: 0.03em rgba(219, 42, 42, 0);
+    text-shadow: 0 0 0em green;
+  }
+  75% {
+    color: #c21d1d;
+    text-shadow: 0 0 0.3em #962323;
+  }
+  100% {
+    color: #c21d1d;
+    -webkit-text-stroke: 0.04em #571d1d;
+    text-shadow: 0 0 0.3em #962323;
+  }
+}
+@keyframes profiletitlebackground {
+  100% {
+    width: 20%;
+  }
+}
+.artistInfo {
+  width: 90%;
+  height: 25%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.artistInfoPortrait {
+  width: 20%;
+  height: 100%;
+  opacity: 0;
+  margin-bottom: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  animation: 1s profileload 0.5s linear forwards;
+}
+
+.artistInfoPortrait h2 {
+  height: 30%;
+  font-size: 2.5em;
+  margin: 0;
+}
+
+.artistProfileImage {
+  width: 5.5em;
+  height: 5.5em;
+  border: 1px solid black;
+  border-radius: 0.3em;
+}
+
+.profileDescription {
+  width: 0%;
+  height: 0%;
+  opacity: 0;
+  background: rgba(130, 238, 250, 0.4);
+  border: 0.3em groove #571d1d;
+  border-radius: 0.7em;
+  padding-top: 2%;
+  padding-left: 5%;
+  margin-right: 10%;
+  overflow: hidden;
+  animation: profileload 1s linear 0.7s forwards, profiledescriptionexpand 1s linear 1s forwards, profiledescriptionglow 1s ease-out 3s forwards;
+}
+
+@keyframes profiledescriptionexpand {
+  50% {
+    width: 20%;
+    height: 0%;
+  }
+  100% {
+    width: 40%;
+    height: 80%;
+  }
+}
+@keyframes profiledescriptionglow {
+  100% {
+    border-color: #c45151;
+    box-shadow: 0 0 1em #c45151;
+  }
+}
+.editProfileButton {
+  text-decoration: none;
+  text-align: center;
+  width: 10%;
+  height: 30%;
+  opacity: 0;
+  background: #c5f0c7;
+  border: 1px solid black;
+  border-radius: 0.3em;
+  animation: profileload 1s linear 0.9s forwards;
+}
+
+@keyframes profileload {
+  100% {
+    opacity: 1;
+  }
+}
+.profilePostList {
+  width: 90%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.profilePostList a:nth-of-type(1) {
+  animation-delay: 0.9s;
+}
+.profilePostList a:nth-of-type(2) {
+  animation-delay: 1.3s;
+}
+.profilePostList a:nth-of-type(3) {
+  animation-delay: 1.7s;
+}
+.profilePostList a:nth-of-type(4) {
+  animation-delay: 2.1s;
+}
+.profilePostList a:nth-of-type(5) {
+  animation-delay: 2.5s;
+}
+.profilePostList a:nth-of-type(6) {
+  animation-delay: 2.9s;
+}
+.profilePostList a:nth-of-type(7) {
+  animation-delay: 3.3s;
+}
+.profilePostList a:nth-of-type(8) {
+  animation-delay: 3.7s;
+}
+.profilePostList a:nth-of-type(9) {
+  animation-delay: 4.1s;
+}
+.profilePostList a:nth-of-type(10) {
+  animation-delay: 4.5s;
+}
+
+.profilePostItem {
+  text-decoration: none;
+  width: 40%;
+  height: 17%;
+  opacity: 0;
+  color: black;
+  background: #11998e;
+  background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
+  background: linear-gradient(to right, #38ef7d, #11998e);
+  border: 0.2em;
+  /*border-image: linear-gradient(to right, #ffe259, #ffa751);*/
+  border-color: #ffa751;
+  /*border-left-color: #ffe259;*/
+  border-style: outset;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  animation: profilepostitemload 1s linear forwards;
+}
+
+@keyframes profilepostitemload {
+  100% {
+    opacity: 1;
+  }
+}
+.recentPosts {
+  height: 100%;
+  width: 42.54871vw;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
-.artistInfoPotrait {
-  margin-left: 2vw;
-}
-
-.recentPosts h1 {
+.postListTitle {
   text-align: center;
+  opacity: 0;
+  color: #281d57;
+  -webkit-text-stroke: 0.03em rgba(30, 150, 46, 0);
+  text-shadow: 0 0 0em green;
   /*display: flex;*/
   /*flex-direction: column;*/
   /*justify-content: space-around;*/
+  animation: postlisttitleintro 2s linear forwards;
 }
 
+@keyframes postlisttitleintro {
+  25% {
+    opacity: 1;
+    -webkit-text-stroke: 0.03em #1e962e;
+  }
+  50% {
+    text-shadow: 0 0 0.3em green;
+  }
+  100% {
+    opacity: 1;
+    -webkit-text-stroke: 0.03em rgba(30, 150, 46, 0);
+    text-shadow: 0 0 0em green;
+  }
+}
 .postList {
   display: flex;
   flex-direction: column;
@@ -301,11 +545,6 @@ header {
   height: 70%;
 }
 
-@keyframes postlistload {
-  100% {
-    opacity: 1;
-  }
-}
 .postList a:nth-of-type(1) {
   animation-delay: 0.4s;
 }
@@ -352,7 +591,7 @@ header {
   border: solid black 0.2em;
   padding: 1em;
   width: 40vw;
-  height: 3em;
+  height: 2.5em;
   border-radius: 10px;
   transition-property: width, height;
   transition: 0.2s linear;
@@ -407,35 +646,55 @@ header {
     color: #90C3D4;
   }
 }
-.profilePostList {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 50%;
-}
-
-.profilePostItem {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: #11998e;
-  background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
-  background: linear-gradient(to right, #38ef7d, #11998e);
-  border: 0.2em;
-  /*border-image: linear-gradient(to right, #ffe259, #ffa751);*/
-  border-color: #ffa751;
-  /*border-left-color: #ffe259;*/
-  border-style: outset;
-  border-radius: 5px;
-  height: 20%;
-  width: 80%;
-}
-
 .myPosts h1 {
   text-align: center;
 }
 
+.myArtists {
+  height: 100%;
+  width: 42.54871vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.artistListTitle {
+  text-align: center;
+  opacity: 0;
+  animation: 1s artistfade linear forwards;
+}
+
+.artistList {
+  height: 80%;
+  display: flex;
+}
+
+.artistItem {
+  text-decoration: none;
+  width: 5em;
+  height: 6.5em;
+  opacity: 0;
+  color: black;
+  background-color: rgba(36, 209, 240, 0.7);
+  border: solid black 3px;
+  border-radius: 0.4em;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  animation: 1s artistfade 0.3s linear forwards;
+}
+
+.artistImage {
+  border-radius: 0.2em;
+}
+
+@keyframes artistfade {
+  100% {
+    opacity: 1;
+  }
+}
 .displayControl {
   width: 100%;
   height: 100%;
@@ -458,7 +717,6 @@ header {
   border: 0.2em solid;
   border-color: rgba(18, 200, 255, 0);
   border-radius: 0.1em;
-  margin-left: 4%;
   margin-bottom: 1%;
   box-shadow: 0 0 0.3em rgba(18, 200, 255, 0);
   animation: viewfade 1s linear 0.3s forwards, viewintro 2.5s linear 0.3s none, viewtitlehover 1s linear infinite;
@@ -481,11 +739,6 @@ header {
     box-shadow: 0 0 0.3em #12c8ff;
   }
 }
-@keyframes viewfade {
-  100% {
-    opacity: 1;
-  }
-}
 @keyframes viewintro {
   50% {
     border-color: #12c8ff;
@@ -498,6 +751,7 @@ header {
 }
 .viewControl {
   width: 90%;
+  height: 11.2%;
   opacity: 0;
   margin-top: 1%;
   margin-bottom: 1%;
@@ -584,7 +838,7 @@ header {
   content: "";
   position: absolute;
   width: 0%;
-  height: 1.8rem;
+  height: 1.6rem;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 0.6em;
   -webkit-transition: none;
@@ -649,6 +903,64 @@ header {
   animation: viewfade 1s linear 0.9s forwards;
 }
 
+.galleryControl {
+  width: 96%;
+  height: 64%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.viewImageFrame {
+  width: 100%;
+  height: 80%;
+  border: solid black 0.3em;
+  border-radius: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.viewImageFrame:first-child:nth-last-child(n+2),
+.viewImageFrame:first-child:nth-last-child(n+2) ~ * {
+  width: 30%;
+  height: 80%;
+}
+
+.viewImage {
+  width: 25em;
+}
+
+.viewPaths {
+  text-align: center;
+  width: 96%;
+  height: 5%;
+  opacity: 0;
+  margin-top: 3%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  animation: viewfade 1s linear 1.2s forwards;
+}
+
+@keyframes viewfade {
+  100% {
+    opacity: 1;
+  }
+}
+.deletePostButton {
+  width: 20%;
+  height: 100%;
+  opacity: 0.5;
+  background-color: rgba(200, 61, 255, 0.6);
+  border: 1px solid black;
+  border-radius: 0.6em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .postForm {
   display: flex;
   flex-direction: column;
@@ -706,7 +1018,7 @@ header {
 }
 .scrollContainer {
   width: 15vw;
-  height: 600px;
+  height: 37.5em;
   border-color: #2C42D1;
   border-width: 15px;
 }
@@ -715,16 +1027,67 @@ header {
   text-align: center;
 }
 
+.newsNav {
+  height: 98%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.newsNav h1 {
+  opacity: 0;
+  animation: newsnavfade 1s linear 0.3s forwards;
+}
+
+.newsList {
+  height: 100%;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  animation: newsnavfade 1s linear 0.6s forwards;
+}
+
 .newsItem {
+  text-decoration: none;
   text-align: center;
+  font: 500px;
   width: 90%;
   height: 10%;
-  background-color: green;
+  background: -webkit-linear-gradient(to right, #1be06d, #168745);
+  background: linear-gradient(to right, #1be06d, #168745);
   border: 0.1em solid black;
   border-radius: 5%;
   margin-left: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+.createNewsButton {
+  text-decoration: none;
+  text: center;
+  height: 4%;
+  width: 45%;
+  opacity: 0;
+  color: black;
+  background: lightblue;
+  border: 1px solid black;
+  border-radius: 0.3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: newsnavfade 1s linear 2s forwards;
+}
+
+@keyframes newsnavfade {
+  100% {
+    opacity: 1;
+  }
+}
 .messageNav {
   height: 98%;
   display: flex;
@@ -793,7 +1156,7 @@ header {
   overflow: hidden;
   background-color: rgba(29, 210, 219, 0.6);
   border: 0.1em solid black;
-  border-radius: 10%;
+  border-radius: 0.4em;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -944,7 +1307,7 @@ header {
   border-color: #dee2e6;
 }
 .page-link:focus {
-  z-index: 2;
+  z-index: 3;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
@@ -959,7 +1322,7 @@ header {
   border-bottom-right-radius: 0.25rem;
 }
 .page-item.active .page-link {
-  z-index: 1;
+  z-index: 3;
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
@@ -1001,6 +1364,7 @@ header {
 }
 
 .pagination {
+  text-decoration: none;
   display: flex;
   border: 2px solid black;
   background: #879cbc;

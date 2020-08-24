@@ -26,6 +26,7 @@ class ProfileDisplay extends Component {
         profileImageUrl={a.profileImageUrl}
         bio={a.bio}
         currentUser={currentUser}
+        isProfileUser={isProfileUser}
       />
     ));
     let artistPList = artists.map(a => (
@@ -37,12 +38,10 @@ class ProfileDisplay extends Component {
     ));
     return (
       <div className="profileDisplay">
-        {isProfileUser && (<h1>My Profile</h1>)}
-        {!isProfileUser && (<h1>Artist Profile</h1>)}
-        <div className="">
-          {artistDisp}
-        </div>
-          {artistPList}
+        {isProfileUser && (<h1 className="profileTitle">My Profile</h1>)}
+        {!isProfileUser && (<h1 className="profileTitle">Artist Profile</h1>)}
+        {artistDisp}
+        {artistPList}
       </div>
     );
   }

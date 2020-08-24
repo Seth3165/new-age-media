@@ -20,8 +20,8 @@ var postSchema = new mongoose.Schema({
     ref: "User",
     required: true
   },
-  file: {
-    type: String,
+  files: {
+    type: Array,
     required: true
   },
   messages: {

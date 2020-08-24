@@ -31,10 +31,10 @@ class NewsList extends Component {
       />
     ));
     return (
-      <div className="newsList">
+      <div className="newsNav">
         <h1>News</h1>
-        <div>
-          {newsList}
+        <div className="newsList">
+        {newsList}
         </div>
         {isAdmin && (<Link to={`/users/${currentUser}/news/addnews`} className="createNewsButton">Add News</Link>)}
       </div>
