@@ -9,7 +9,7 @@
     "dotenv": "^6.2.0",
     "ffmpeg": "0.0.4",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mp4-convert": "^1.0.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
